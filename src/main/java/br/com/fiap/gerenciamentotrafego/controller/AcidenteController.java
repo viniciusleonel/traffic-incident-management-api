@@ -1,9 +1,7 @@
 package br.com.fiap.gerenciamentotrafego.controller;
 
 import br.com.fiap.gerenciamentotrafego.dto.AcidenteCadastroDTO;
-import br.com.fiap.gerenciamentotrafego.dto.UsuarioCadastroDTO;
 import br.com.fiap.gerenciamentotrafego.service.AcidenteService;
-import br.com.fiap.gerenciamentotrafego.service.UsuarioService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
