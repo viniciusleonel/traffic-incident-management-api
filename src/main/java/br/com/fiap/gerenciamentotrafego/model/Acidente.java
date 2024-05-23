@@ -11,7 +11,6 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "tbl_acidente")
 @Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode

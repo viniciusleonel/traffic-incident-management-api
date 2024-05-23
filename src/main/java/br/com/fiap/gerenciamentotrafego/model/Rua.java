@@ -8,7 +8,6 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "tbl_rua")
 @Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Rua {

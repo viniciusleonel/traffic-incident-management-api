@@ -3,17 +3,13 @@ package br.com.fiap.gerenciamentotrafego.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Positive;
 import lombok.*;
-import org.antlr.v4.runtime.misc.NotNull;
-import java.time.LocalDate;
 
 @Entity
 @Table(name = "tbl_veiculos")
 @Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-
 public class Veiculo {
 
     @Id
