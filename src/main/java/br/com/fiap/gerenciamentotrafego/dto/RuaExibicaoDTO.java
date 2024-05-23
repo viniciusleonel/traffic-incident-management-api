@@ -3,7 +3,6 @@ package br.com.fiap.gerenciamentotrafego.dto;
 import br.com.fiap.gerenciamentotrafego.model.Rua;
 
 public record RuaExibicaoDTO(
-        Long idRua,
         String logradouro,
         Integer numero,
         String cep,
@@ -12,7 +11,6 @@ public record RuaExibicaoDTO(
 ) {
     public RuaExibicaoDTO (Rua rua){
         this(
-             rua.getIdRua(),
              rua.getLogradouro(),
              rua.getNumero(),
              rua.getCep(),

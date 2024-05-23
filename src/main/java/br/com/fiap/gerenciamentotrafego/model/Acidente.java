@@ -1,5 +1,6 @@
 package br.com.fiap.gerenciamentotrafego.model;
 
+import br.com.fiap.gerenciamentotrafego.dto.AcidenteCadastroDTO;
 import br.com.fiap.gerenciamentotrafego.model.Rua;
 
 import jakarta.persistence.*;
@@ -21,12 +22,12 @@ public class Acidente {
     @Column(name = "ID_Acidente")
     private Long idAcidente;
 
-    @ManyToOne
-    @JoinColumn(name = "ID_Veiculo", referencedColumnName = "ID_Veiculo", nullable = false)
+//    @ManyToOne
+//    @JoinColumn(name = "ID_Veiculo", referencedColumnName = "ID_Veiculo", nullable = false)
     private Veiculo veiculo;
 
-    @ManyToOne
-    @JoinColumn(name = "ID_Rua", referencedColumnName = "ID_Rua", nullable = false)
+//    @ManyToOne
+//    @JoinColumn(name = "ID_Rua", referencedColumnName = "ID_Rua", nullable = false)
     private Rua rua;
 
     @Column(name = "Data_Hora", length = 10, nullable = false)
@@ -37,4 +38,12 @@ public class Acidente {
 
     @Column(name = "Localizacao", length = 100, nullable = false)
     private String localizacao;
+
+    public Acidente(AcidenteCadastroDTO dados) {
+        this.veiculo = new Veiculo(dados.veiculo());
+        this.rua = new Rua(dados.rua());
+        this.dataHora = dados.dataHora();
+        this.gravidade = dados.gravidade();
+        this.localizacao = dados.localizacao();
+    }
 }
