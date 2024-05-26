@@ -1,9 +1,15 @@
 package br.com.fiap.gerenciamentotrafego.controller;
 
 import br.com.fiap.gerenciamentotrafego.dto.AcidenteCadastroDTO;
+import br.com.fiap.gerenciamentotrafego.dto.AcidenteExibicaoDTO;
+import br.com.fiap.gerenciamentotrafego.dto.UsuarioExibicaoDTO;
 import br.com.fiap.gerenciamentotrafego.service.AcidenteService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -13,10 +19,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 @CrossOrigin(origins = {"*"})
 public class AcidenteController {
 
-    @GetMapping
-    public String get () {
-        return "Acidentes";
-    }
 
     @Autowired
     private AcidenteService acidenteService;
@@ -25,5 +27,12 @@ public class AcidenteController {
     public ResponseEntity<?> cadastrar(@RequestBody @Valid AcidenteCadastroDTO dados, UriComponentsBuilder uriBuilder) {
 
         return acidenteService.cadastrarNovoAcidente(dados, uriBuilder);
+    }
+
+    @SecurityRequirement(name = "bearer-key")
+    @GetMapping
+    public ResponseEntity<Page<AcidenteExibicaoDTO>> listarAcidentes(@PageableDefault(size = 10, sort = {"idAcidente"}) Pageable paginacao) {
+        Page<AcidenteExibicaoDTO> page = acidenteService.listarAcidentes(paginacao);
+        return ResponseEntity.ok(page);
     }
 }
