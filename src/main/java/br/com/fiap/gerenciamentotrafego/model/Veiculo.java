@@ -14,11 +14,6 @@ import lombok.*;
 @Embeddable
 public class Veiculo {
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @Column(name = "ID_Veiculo")
-//    private Long idVeiculo;
-
     @Column(name = "Placa", unique = true, length = 8, nullable = false)
     private String placa;
 

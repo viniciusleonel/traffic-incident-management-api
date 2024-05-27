@@ -4,6 +4,7 @@ import br.com.fiap.gerenciamentotrafego.dto.AcidenteCadastroDTO;
 import br.com.fiap.gerenciamentotrafego.dto.AcidenteExibicaoDTO;
 import br.com.fiap.gerenciamentotrafego.model.Acidente;
 import br.com.fiap.gerenciamentotrafego.repository.AcidenteRepository;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -56,6 +57,18 @@ public class AcidenteService {
             return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.badRequest().body("Acidente não encontrado!");
+        }
+
+    }
+
+    public ResponseEntity detalharAcidente(@PathVariable Long id){
+
+        try {
+            var acidente = acidenteRepository.getReferenceById(id);
+
+            return ResponseEntity.ok(new AcidenteExibicaoDTO(acidente));
+        } catch (EntityNotFoundException erro) {
+            throw new EntityNotFoundException("Acidente não encontrado!");
         }
 
     }

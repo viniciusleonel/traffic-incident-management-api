@@ -46,4 +46,10 @@ public class AcidenteController {
 
         return acidenteService.excluirAcidente(id);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity detalhar(@PathVariable Long id){
+
+        return acidenteService.detalharAcidente(id);
+    }
 }

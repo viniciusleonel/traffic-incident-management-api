@@ -14,12 +14,16 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode
 public class Clima {
 
-//    CREATE TABLE clima (
-//    id_clima VARCHAR2(10),
-//    id_localizacao NUMBER);
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "SEQ_CLIMA"
+    )
+    @SequenceGenerator(
+            name = "SEQ_CLIMA",
+            sequenceName = "SEQ_CLIMA",
+            allocationSize = 20
+    )
     @Column(name = "id_clima")
     private Long idClima;
 

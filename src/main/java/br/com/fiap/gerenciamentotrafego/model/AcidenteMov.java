@@ -16,14 +16,16 @@ import java.time.LocalDate;
 @EqualsAndHashCode
 public class AcidenteMov {
 
-//    CREATE TABLE acidente_mov (
-//            id_acidente NUMBER,
-//            hora_mov DATE,
-//            operacao VARCHAR2(9),
-//    gravidade VARCHAR2(20));
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "SEQ_ACIDENTES_MOV"
+    )
+    @SequenceGenerator(
+            name = "SEQ_ACIDENTES_MOV",
+            sequenceName = "SEQ_ACIDENTES_MOV",
+            allocationSize = 20
+    )
     @Column(name = "id_acidente_mov")
     private Long idAcidenteMov;
 

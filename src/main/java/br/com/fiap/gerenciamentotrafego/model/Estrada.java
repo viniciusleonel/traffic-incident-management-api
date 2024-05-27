@@ -13,13 +13,16 @@ import java.util.Date;
 @Table(name = "tbl_estrada")
 public class Estrada {
 
-//    id_estrada NUMBER PRIMARY KEY,
-//    vel_max NUMBER,
-//    hora DATE,
-//    nome_estrada VARCHAR2(50)
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "SEQ_ESTRADA"
+    )
+    @SequenceGenerator(
+            name = "SEQ_ESTRADA",
+            sequenceName = "SEQ_ESTRADA",
+            allocationSize = 20
+    )
     @Column(name = "ID_Estrada")
     private Long idEstrada;
 

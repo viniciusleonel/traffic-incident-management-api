@@ -16,16 +16,20 @@ import java.time.LocalDate;
 public class Acidente {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "SEQ_ACIDENTES"
+    )
+    @SequenceGenerator(
+            name = "SEQ_ACIDENTES",
+            sequenceName = "SEQ_ACIDENTES",
+            allocationSize = 20
+    )
     @Column(name = "id_acidente")
     private Long idAcidente;
 
-//    @ManyToOne
-//    @JoinColumn(name = "ID_Veiculo", referencedColumnName = "ID_Veiculo", nullable = false)
     private Veiculo veiculo;
 
-//    @ManyToOne
-//    @JoinColumn(name = "ID_Rua", referencedColumnName = "ID_Rua", nullable = false)
     private Rua rua;
 
     @Column(name = "data_Hora",  nullable = false)
