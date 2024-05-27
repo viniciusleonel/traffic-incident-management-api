@@ -38,6 +38,12 @@ public class Usuario implements UserDetails {
         this.role = dados.role();
     }
 
+    public Usuario(UsuarioCadastroDTO dados) {
+        this.email = dados.email();
+        this.senha = dados.senha();
+        this.role = dados.role();
+    }
+
     private void criptografarSenha(String senha, PasswordEncoder passwordEncoder) {
         this.senha = passwordEncoder.encode(senha);
     }
