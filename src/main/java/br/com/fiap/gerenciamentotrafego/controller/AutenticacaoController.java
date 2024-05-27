@@ -15,7 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/login")
+@RequestMapping("autenticacao")
 @CrossOrigin(origins = {"*"})
 public class AutenticacaoController {
 
@@ -28,7 +28,7 @@ public class AutenticacaoController {
     @Autowired
     private AutenticacaoService autenticacaoService;
 
-    @PostMapping
+    @PostMapping("login")
     public ResponseEntity efetuarLogin(@RequestBody @Valid AutenticacaoDTO dados){
 
         // Verificar se o usuário existe no banco de dados

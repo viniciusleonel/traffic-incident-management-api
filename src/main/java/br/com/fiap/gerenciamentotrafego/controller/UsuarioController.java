@@ -22,7 +22,7 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
-    @PostMapping()
+    @PostMapping("/cadastrar")
     public ResponseEntity<?> cadastrar(@RequestBody @Valid UsuarioCadastroDTO dados, UriComponentsBuilder uriBuilder) {
 
         if (usuarioService.usuarioExiste(dados.email())) {
@@ -32,8 +32,7 @@ public class UsuarioController {
         return usuarioService.cadastrarNovoUsuario(dados, uriBuilder);
     }
 
-    @SecurityRequirement(name = "bearer-key")
-    @GetMapping
+    @GetMapping("/listar")
     public ResponseEntity<Page<UsuarioExibicaoDTO>> listarUsuarios(@PageableDefault(size = 10, sort = {"email"}) Pageable paginacao) {
         Page<UsuarioExibicaoDTO> page = usuarioService.listarUsuarios(paginacao);
         return ResponseEntity.ok(page);

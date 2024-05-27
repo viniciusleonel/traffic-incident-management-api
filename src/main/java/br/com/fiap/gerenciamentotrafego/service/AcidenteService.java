@@ -61,7 +61,7 @@ public class AcidenteService {
 
     }
 
-    public ResponseEntity detalharAcidente(@PathVariable Long id){
+    public ResponseEntity buscarAcidente(@PathVariable Long id){
 
         try {
             var acidente = acidenteRepository.getReferenceById(id);

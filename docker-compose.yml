@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  gerenciamento-trafego:
+    image: gerenciamento-trafego:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - gerenciamento-trafego-net
+
+networks:
+  gerenciamento-trafego-net:
+    driver: bridge

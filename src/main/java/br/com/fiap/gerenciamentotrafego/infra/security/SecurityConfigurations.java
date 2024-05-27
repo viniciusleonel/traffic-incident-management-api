@@ -26,16 +26,10 @@ public class SecurityConfigurations {
 
         // Desativa csrf
         return http.csrf(csrf -> csrf.disable())
-
-                // Passando Stateless para o gerenciador de sessao
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-
-                // Autorizacoes de req HTTP
                 .authorizeHttpRequests(req -> {
-                    req.requestMatchers(HttpMethod.POST, "/login").permitAll();
-                    req.requestMatchers(HttpMethod.POST, "/usuarios").permitAll();
-                    req.requestMatchers(HttpMethod.GET, "/usuarios").hasRole("ADMIN");
-
+                    req.requestMatchers(HttpMethod.POST, "/autenticacao/login").permitAll();
+                    req.requestMatchers(HttpMethod.POST, "/usuarios/cadastrar").permitAll();
                     req.requestMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll();
                     req.anyRequest().authenticated();
                 })

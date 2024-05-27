@@ -14,7 +14,7 @@ import lombok.*;
 @Embeddable
 public class Veiculo {
 
-    @Column(name = "Placa", unique = true, length = 8, nullable = false)
+    @Column(name = "Placa", length = 8, nullable = false)
     private String placa;
 
     @Column(name = "Modelo", length = 100, nullable = false)

@@ -22,34 +22,33 @@ public class AcidenteController {
     @Autowired
     private AcidenteService acidenteService;
 
-    @PostMapping()
+    @PostMapping("cadastrar")
     public ResponseEntity<?> cadastrar(@RequestBody @Valid AcidenteCadastroDTO dados, UriComponentsBuilder uriBuilder) {
 
         return acidenteService.cadastrarNovoAcidente(dados, uriBuilder);
     }
 
-    @SecurityRequirement(name = "bearer-key")
-    @GetMapping
+    @GetMapping("listar")
     public ResponseEntity<Page<AcidenteExibicaoDTO>> listarAcidentes(@PageableDefault(size = 10, sort = {"idAcidente"}) Pageable paginacao) {
         Page<AcidenteExibicaoDTO> page = acidenteService.listarAcidentes(paginacao);
         return ResponseEntity.ok(page);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("atualizar/{id}")
     public ResponseEntity atualizar(@RequestBody @Valid AcidenteCadastroDTO dados, @PathVariable Long id){
 
         return acidenteService.atualizarAcidente(dados, id);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("deletar/{id}")
     public ResponseEntity excluir(@PathVariable Long id){
 
         return acidenteService.excluirAcidente(id);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity detalhar(@PathVariable Long id){
+    @GetMapping("buscar/{id}")
+    public ResponseEntity buscar(@PathVariable Long id){
 
-        return acidenteService.detalharAcidente(id);
+        return acidenteService.buscarAcidente(id);
     }
 }
