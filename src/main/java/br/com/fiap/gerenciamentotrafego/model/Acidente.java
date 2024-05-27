@@ -19,7 +19,7 @@ public class Acidente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_Acidente")
+    @Column(name = "id_acidente")
     private Long idAcidente;
 
 //    @ManyToOne
@@ -30,13 +30,13 @@ public class Acidente {
 //    @JoinColumn(name = "ID_Rua", referencedColumnName = "ID_Rua", nullable = false)
     private Rua rua;
 
-    @Column(name = "Data_Hora", length = 10, nullable = false)
+    @Column(name = "data_Hora",  nullable = false)
     private LocalDate dataHora;
 
-    @Column(name = "Gravidade", length = 50, nullable = false)
+    @Column(name = "gravidade", length = 50, nullable = false)
     private String gravidade;
 
-    @Column(name = "Localizacao", length = 100, nullable = false)
+    @Column(name = "localizacao", length = 100, nullable = false)
     private String localizacao;
 
     public Acidente(AcidenteCadastroDTO dados) {
