@@ -2,7 +2,6 @@ package br.com.fiap.gerenciamentotrafego.controller;
 
 import br.com.fiap.gerenciamentotrafego.dto.AcidenteCadastroDTO;
 import br.com.fiap.gerenciamentotrafego.dto.AcidenteExibicaoDTO;
-import br.com.fiap.gerenciamentotrafego.dto.UsuarioExibicaoDTO;
 import br.com.fiap.gerenciamentotrafego.service.AcidenteService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
@@ -34,5 +33,11 @@ public class AcidenteController {
     public ResponseEntity<Page<AcidenteExibicaoDTO>> listarAcidentes(@PageableDefault(size = 10, sort = {"idAcidente"}) Pageable paginacao) {
         Page<AcidenteExibicaoDTO> page = acidenteService.listarAcidentes(paginacao);
         return ResponseEntity.ok(page);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity atualizar(@RequestBody @Valid AcidenteCadastroDTO dados, @PathVariable Long id){
+
+        return acidenteService.atualizarAcidente(dados, id);
     }
 }

@@ -2,15 +2,17 @@ package br.com.fiap.gerenciamentotrafego.service;
 
 import br.com.fiap.gerenciamentotrafego.dto.AcidenteCadastroDTO;
 import br.com.fiap.gerenciamentotrafego.dto.AcidenteExibicaoDTO;
-import br.com.fiap.gerenciamentotrafego.dto.UsuarioExibicaoDTO;
 import br.com.fiap.gerenciamentotrafego.model.Acidente;
 import br.com.fiap.gerenciamentotrafego.repository.AcidenteRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @Service
@@ -32,6 +34,14 @@ public class AcidenteService {
         return acidenteRepository.findAll(paginacao).map(AcidenteExibicaoDTO::new);
     }
 
+    @Transactional
+    public ResponseEntity atualizarAcidente(@RequestBody @Valid AcidenteCadastroDTO dados, @PathVariable Long id){
+        Acidente acidente = acidenteRepository.getReferenceById(id);
+
+        acidente.atualizarInformacoes(dados);
+
+        return ResponseEntity.ok(new AcidenteExibicaoDTO(acidente));
+    }
 
 }
 

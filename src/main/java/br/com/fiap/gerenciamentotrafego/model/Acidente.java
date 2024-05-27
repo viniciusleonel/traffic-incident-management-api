@@ -1,11 +1,9 @@
 package br.com.fiap.gerenciamentotrafego.model;
 
 import br.com.fiap.gerenciamentotrafego.dto.AcidenteCadastroDTO;
-import br.com.fiap.gerenciamentotrafego.model.Rua;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.antlr.v4.runtime.misc.NotNull;
 
 import java.time.LocalDate;
 
@@ -45,5 +43,25 @@ public class Acidente {
         this.dataHora = dados.dataHora();
         this.gravidade = dados.gravidade();
         this.localizacao = dados.localizacao();
+    }
+
+    public void atualizarInformacoes(AcidenteCadastroDTO dados) {
+        if (dados.veiculo() != null) {
+            this.veiculo = new Veiculo(dados.veiculo());
+        }
+        if (dados.rua() != null) {
+            this.rua = new Rua(dados.rua());
+        }
+        if (dados.dataHora() != null) {
+            this.dataHora = dados.dataHora();
+        }
+        if (dados.gravidade() != null) {
+            this.gravidade = dados.gravidade();
+        }
+        if (dados.dataHora() != null) {
+            this.localizacao = dados.localizacao();
+        }
+
+
     }
 }
