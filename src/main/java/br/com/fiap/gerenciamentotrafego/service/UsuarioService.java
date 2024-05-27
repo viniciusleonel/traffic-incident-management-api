@@ -33,7 +33,7 @@ public class UsuarioService {
     public ResponseEntity<?> cadastrarNovoUsuario(UsuarioCadastroDTO dados, UriComponentsBuilder uriBuilder) {
         Usuario usuario = new Usuario(dados, passwordEncoder);
         usuarioRepository.save(usuario);
-        var uri = uriBuilder.path("/usuarios/{id}").buildAndExpand(usuario.getId()).toUri();
+        var uri = uriBuilder.path("/usuarios/{id}").buildAndExpand(usuario.getIdUsuario()).toUri();
         return ResponseEntity.created(uri).body(new UsuarioExibicaoDTO(usuario));
     }
 

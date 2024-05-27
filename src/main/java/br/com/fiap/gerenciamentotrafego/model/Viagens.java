@@ -11,14 +11,22 @@ import lombok.*;
 public class Viagens {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_Viagem")
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "SEQ_VIAGENS"
+    )
+    @SequenceGenerator(
+            name = "SEQ_VIAGENS",
+            sequenceName = "SEQ_VIAGENS",
+            allocationSize = 20
+    )
+    @Column(name = "id_viagem")
     private Long idViagens;
 
-    @Column(name = "Distancia", nullable = false)
+    @Column(name = "distancia", nullable = false)
     private Integer distancia;
 
-    @Column(name = "Vel_Trafego", nullable = false)
+    @Column(name = "vel_trafego", nullable = false)
     private Integer velTrafego;
 
 }

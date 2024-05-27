@@ -26,7 +26,7 @@ public class AcidenteMov {
             sequenceName = "SEQ_ACIDENTES_MOV",
             allocationSize = 20
     )
-    @Column(name = "id_acidente_mov")
+    @Column(name = "id_acidentes_mov")
     private Long idAcidenteMov;
 
     @Column(name = "hora_mov", nullable = false)

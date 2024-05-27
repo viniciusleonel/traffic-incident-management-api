@@ -24,7 +24,7 @@ public class TokenService {
             return JWT.create()
                     .withIssuer("API Gerenciamento de trafego")
                     .withSubject(usuario.getEmail())
-                    .withClaim( "ID", usuario.getId())
+                    .withClaim( "ID", usuario.getIdUsuario())
                     .withExpiresAt(dataExpiracao())
                     .sign(algoritmo);
         } catch (JWTCreationException exception) {

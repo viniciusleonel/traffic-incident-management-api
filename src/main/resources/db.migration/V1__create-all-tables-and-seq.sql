@@ -1,0 +1,81 @@
+-- Sequence para tabela acidente
+CREATE SEQUENCE SEQ_ACIDENTES
+START WITH 1
+INCREMENT BY 1
+NOCACHE
+NOCYCLE;
+
+-- Sequence para tabela acidente_mov
+CREATE SEQUENCE SEQ_ACIDENTES_MOV
+START WITH 1
+INCREMENT BY 1
+NOCACHE
+NOCYCLE;
+
+-- Sequence para tabela estrada
+CREATE SEQUENCE SEQ_ESTRADA
+START WITH 1
+INCREMENT BY 1
+NOCACHE
+NOCYCLE;
+
+-- Sequence para tabela clima
+CREATE SEQUENCE SEQ_CLIMA
+START WITH 1
+INCREMENT BY 1
+NOCACHE
+NOCYCLE;
+
+-- Sequence para tabela viagem
+CREATE SEQUENCE SEQ_VIAGENS
+START WITH 1
+INCREMENT BY 1
+NOCACHE
+NOCYCLE;
+
+--TABELAS
+
+CREATE TABLE tbl_usuarios (
+    id_usuario NUMBER DEFAULT SEQ_ACIDENTES.NEXTVAL PRIMARY KEY,
+    email VARCHAR2(100) UNIQUE NOT NULL,
+    senha VARCHAR2(20) NOT NULL,
+    role VARCHAR2(20) NOT NULL
+);
+
+CREATE TABLE tbl_acidentes (
+    id_acidente NUMBER DEFAULT SEQ_ACIDENTES.NEXTVAL PRIMARY KEY,
+    data_hora DATE NOT NULL,
+    localizacao VARCHAR2(100) NOT NULL,
+    gravidade VARCHAR2(50) NOT NULL
+);
+
+
+CREATE TABLE tbl_acidente_mov (
+    id_acidente_mov NUMBER DEFAULT SEQ_ACIDENTES_MOV.NEXTVAL PRIMARY KEY,
+    hora_mov DATE NOT NULL,
+    operacao VARCHAR2(9) NOT NULL,
+    gravidade VARCHAR2(20) NOT NULL
+);
+
+
+CREATE TABLE tbl_estrada (
+     id_estrada NUMBER DEFAULT SEQ_ESTRADA.NEXTVAL PRIMARY KEY,
+     vel_max NUMBER NOT NULL,
+     hora DATE NOT NULL,
+     nome_estrada VARCHAR2(50) NOT NULL
+);
+
+
+CREATE TABLE tbl_clima (
+    id_clima NUMBER DEFAULT SEQ_CLIMA.NEXTVAL PRIMARY KEY,
+    id_localizacao NUMBER NOT NULL
+);
+
+
+CREATE TABLE tbl_viagens (
+    id_viagem NUMBER DEFAULT SEQ_VIAGENS.NEXTVAL PRIMARY KEY,
+    distancia NUMBER NOT NULL,
+    vel_trefego NUMBER NOT NULL
+);
+
+

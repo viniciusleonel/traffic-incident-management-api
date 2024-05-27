@@ -8,7 +8,7 @@ import lombok.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "tbl_acidente")
+@Table(name = "tbl_acidentes")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -32,7 +32,7 @@ public class Acidente {
 
     private Rua rua;
 
-    @Column(name = "data_Hora",  nullable = false)
+    @Column(name = "data_hora",  nullable = false)
     private LocalDate dataHora;
 
     @Column(name = "gravidade", length = 50, nullable = false)

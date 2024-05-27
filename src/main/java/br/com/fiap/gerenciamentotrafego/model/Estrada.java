@@ -10,7 +10,7 @@ import java.util.Date;
 @AllArgsConstructor
 @EqualsAndHashCode
 @Entity
-@Table(name = "tbl_estrada")
+@Table(name = "tbl_estradas")
 public class Estrada {
 
     @Id
@@ -23,7 +23,7 @@ public class Estrada {
             sequenceName = "SEQ_ESTRADA",
             allocationSize = 20
     )
-    @Column(name = "ID_Estrada")
+    @Column(name = "id_estrada")
     private Long idEstrada;
 
     @Column(name = "vel_max",  nullable = false)
