@@ -40,4 +40,10 @@ public class AcidenteController {
 
         return acidenteService.atualizarAcidente(dados, id);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity excluir(@PathVariable Long id){
+
+        return acidenteService.excluirAcidente(id);
+    }
 }

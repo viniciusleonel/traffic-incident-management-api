@@ -37,10 +37,27 @@ public class AcidenteService {
     @Transactional
     public ResponseEntity atualizarAcidente(@RequestBody @Valid AcidenteCadastroDTO dados, @PathVariable Long id){
         Acidente acidente = acidenteRepository.getReferenceById(id);
+        boolean acidenteExiste = acidenteRepository.existsById(acidente.getIdAcidente());
 
-        acidente.atualizarInformacoes(dados);
+        if (acidenteExiste) {
+            acidente.atualizarInformacoes(dados);
+            return ResponseEntity.ok(new AcidenteExibicaoDTO(acidente));
+        } else {
+            return ResponseEntity.badRequest().body("Acidente não encontrado!");
+        }
+    }
 
-        return ResponseEntity.ok(new AcidenteExibicaoDTO(acidente));
+    @Transactional
+    public ResponseEntity excluirAcidente(@PathVariable Long id){
+        Acidente acidente = acidenteRepository.getReferenceById(id);
+        boolean acidenteExiste = acidenteRepository.existsById(acidente.getIdAcidente());
+        if (acidenteExiste) {
+            acidenteRepository.delete(acidente);
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.badRequest().body("Acidente não encontrado!");
+        }
+
     }
 
 }
