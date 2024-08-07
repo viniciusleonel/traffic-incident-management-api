@@ -1,29 +1,29 @@
 package br.com.fiap.gerenciamentotrafego.model;
 
 import br.com.fiap.gerenciamentotrafego.dto.RuaCadastroDTO;
-import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import lombok.*;
-
+import org.springframework.data.mongodb.core.mapping.Field;
 
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Embeddable
 public class Rua {
 
-    @Column(name = "logradouro", length = 100, nullable = false)
+    @Field
     private String logradouro;
 
-    @Column(name = "numero", nullable = false)
+    @Field
     private Integer numero;
 
-    @Column(name = "cep", length = 8, nullable = false)
+    @Field
     private String cep;
 
-    @Column(name = "cidade", length = 20, nullable = false)
+    @Field
     private String cidade;
 
-    @Column(name = "estado", length = 20, nullable = false)
+    @Field
     private String estado;
 
     public Rua(RuaCadastroDTO rua) {

@@ -1,31 +1,28 @@
 package br.com.fiap.gerenciamentotrafego.model;
 
 import br.com.fiap.gerenciamentotrafego.dto.VeiculoCadastroDTO;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.Positive;
 import lombok.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
-//@Entity
-//@Table(name = "tbl_veiculos")
+@Document(collection = "veiculos")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
-@Embeddable
+@EqualsAndHashCode(of = "placa")
 public class Veiculo {
 
-    @Column(name = "Placa", length = 8, nullable = false)
+    @Id
     private String placa;
 
-    @Column(name = "Modelo", length = 100, nullable = false)
+    @Field
     private String modelo;
 
-//    @Enumerated(EnumType.STRING)
-    @Column(name = "Ano", nullable = false)
-    @Positive
+    @Field
     private Integer ano;
 
-    @Column(name = "Cor", length = 50, nullable = false)
+    @Field
     private String cor;
 
     public Veiculo(VeiculoCadastroDTO dados) {

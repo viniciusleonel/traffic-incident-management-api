@@ -1,38 +1,29 @@
 package br.com.fiap.gerenciamentotrafego.model;
 
-import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import lombok.*;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.Date;
 
+@Document(collection = "usuarios")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
-@Entity
-@Table(name = "tbl_estradas")
+@EqualsAndHashCode(of = "idEstrada")
 public class Estrada {
 
     @Id
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "SEQ_ESTRADA"
-    )
-    @SequenceGenerator(
-            name = "SEQ_ESTRADA",
-            sequenceName = "SEQ_ESTRADA",
-            allocationSize = 20
-    )
-    @Column(name = "id_estrada")
-    private Long idEstrada;
+    private String idEstrada;
 
-    @Column(name = "vel_max",  nullable = false)
+    @Field
     private Integer velocidadeMax;
 
-    @Column(name = "hora", nullable = false)
+    @Field
     private Date hora;
 
-    @Column(name = "nome_estrada", length = 50, nullable = false)
+    @Field
     private String nomeEstrada;
 
 }

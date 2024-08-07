@@ -1,10 +1,12 @@
 package br.com.fiap.gerenciamentotrafego.repository;
 
 import br.com.fiap.gerenciamentotrafego.model.Usuario;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Repository;
 
-public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
+@Repository
+public interface UsuarioRepository extends MongoRepository<Usuario, String> {
     UserDetails findByEmail(String email);
 
     boolean existsByEmail(String email);

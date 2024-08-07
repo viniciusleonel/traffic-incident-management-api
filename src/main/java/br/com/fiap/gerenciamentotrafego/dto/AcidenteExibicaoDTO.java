@@ -7,7 +7,7 @@ import br.com.fiap.gerenciamentotrafego.model.Veiculo;
 import java.time.LocalDate;
 
 public record AcidenteExibicaoDTO(
-        Long idAcidente,
+        String idAcidente,
         LocalDate dataHora,
         String gravidade,
         String localizacao,

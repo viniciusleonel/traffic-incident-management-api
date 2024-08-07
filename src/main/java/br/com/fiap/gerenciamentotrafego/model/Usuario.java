@@ -1,8 +1,10 @@
 package br.com.fiap.gerenciamentotrafego.model;
 
 import br.com.fiap.gerenciamentotrafego.dto.UsuarioCadastroDTO;
-import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import lombok.*;
+import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,8 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import java.util.Collection;
 import java.util.List;
 
-@Table(name = "tbl_usuarios")
-@Entity(name = "Usuario")
+@Document(collection = "usuarios")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,18 +20,15 @@ import java.util.List;
 public class Usuario implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_usuario")
-    private Long idUsuario;
+    private String idUsuario;
 
-    @Column(length = 100, unique = true, nullable = false)
+    @Field
     private String email;
 
-    @Column(length = 100, nullable = false)
+    @Field
     private String senha;
 
-    @Column(length = 20, nullable = false)
-    @Enumerated(EnumType.STRING)
+    @Field
     private UsuarioRole role;
 
     public Usuario (UsuarioCadastroDTO dados, PasswordEncoder passwordEncoder) {

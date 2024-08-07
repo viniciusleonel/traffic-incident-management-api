@@ -1,33 +1,21 @@
 package br.com.fiap.gerenciamentotrafego.model;
 
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import lombok.*;
+import org.springframework.data.mongodb.core.mapping.Field;
 
-@Entity
-@Table(name = "tbl_clima")
+@Document(collection = "climas")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
+@EqualsAndHashCode(of = "idClima")
 public class Clima {
 
     @Id
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "SEQ_CLIMA"
-    )
-    @SequenceGenerator(
-            name = "SEQ_CLIMA",
-            sequenceName = "SEQ_CLIMA",
-            allocationSize = 20
-    )
-    @Column(name = "id_clima")
-    private Long idClima;
+    private String idClima;
 
-    @Column(name = "id_localizacao")
+    @Field
     private Long idLocalizacao;
 
 }

@@ -1,40 +1,31 @@
 package br.com.fiap.gerenciamentotrafego.model;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
-@Entity
-@Table(name = "tbl_acidente_mov")
+@Document(collection = "acidentes_mov")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
+@EqualsAndHashCode(of = "idAcidenteMov")
 public class AcidenteMov {
 
     @Id
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "SEQ_ACIDENTES_MOV"
-    )
-    @SequenceGenerator(
-            name = "SEQ_ACIDENTES_MOV",
-            sequenceName = "SEQ_ACIDENTES_MOV",
-            allocationSize = 20
-    )
-    @Column(name = "id_acidentes_mov")
-    private Long idAcidenteMov;
+    private String idAcidenteMov;
 
-    @Column(name = "hora_mov", nullable = false)
+    @Field
     private LocalDate dataHora;
 
-    @Column(name = "operacao", length = 9, nullable = false)
+    @Field
     private String operacao;
 
-    @Column(name = "gravidade", length = 20, nullable = false)
+    @Field
     private String gravidade;
 }

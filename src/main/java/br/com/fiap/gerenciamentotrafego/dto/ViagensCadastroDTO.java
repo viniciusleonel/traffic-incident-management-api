@@ -1,7 +1,7 @@
 package br.com.fiap.gerenciamentotrafego.dto;
 
 public record ViagensCadastroDTO(
-        Long idViagens,
+        String idViagens,
         Integer distancia,
         Integer velTrafego
 ) {

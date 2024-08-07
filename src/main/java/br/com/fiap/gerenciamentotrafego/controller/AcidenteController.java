@@ -35,19 +35,19 @@ public class AcidenteController {
     }
 
     @PutMapping("atualizar/{id}")
-    public ResponseEntity atualizar(@RequestBody @Valid AcidenteCadastroDTO dados, @PathVariable Long id){
+    public ResponseEntity atualizar(@RequestBody @Valid AcidenteCadastroDTO dados, @PathVariable String id){
 
         return acidenteService.atualizarAcidente(dados, id);
     }
 
     @DeleteMapping("deletar/{id}")
-    public ResponseEntity excluir(@PathVariable Long id){
+    public ResponseEntity excluir(@PathVariable String id){
 
         return acidenteService.excluirAcidente(id);
     }
 
     @GetMapping("buscar/{id}")
-    public ResponseEntity buscar(@PathVariable Long id){
+    public ResponseEntity buscar(@PathVariable String id){
 
         return acidenteService.buscarAcidente(id);
     }

@@ -1,32 +1,25 @@
 package br.com.fiap.gerenciamentotrafego.model;
 
-import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import lombok.*;
+import org.springframework.data.mongodb.core.mapping.Field;
 
-@Entity
-@Table(name = "tbl_viagens")
+
+@Document(collection = "viagens")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(of = "idViagens")
 public class Viagens {
 
     @Id
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "SEQ_VIAGENS"
-    )
-    @SequenceGenerator(
-            name = "SEQ_VIAGENS",
-            sequenceName = "SEQ_VIAGENS",
-            allocationSize = 20
-    )
-    @Column(name = "id_viagem")
-    private Long idViagens;
+    private String idViagens;
 
-    @Column(name = "distancia", nullable = false)
+    @Field
     private Integer distancia;
 
-    @Column(name = "vel_trafego", nullable = false)
+    @Field
     private Integer velTrafego;
 
 }

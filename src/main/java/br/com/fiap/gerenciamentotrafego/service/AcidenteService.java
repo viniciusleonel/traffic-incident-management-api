@@ -4,7 +4,6 @@ import br.com.fiap.gerenciamentotrafego.dto.AcidenteCadastroDTO;
 import br.com.fiap.gerenciamentotrafego.dto.AcidenteExibicaoDTO;
 import br.com.fiap.gerenciamentotrafego.model.Acidente;
 import br.com.fiap.gerenciamentotrafego.repository.AcidenteRepository;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,6 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import java.util.Optional;
 
 @Service
 public class AcidenteService {
@@ -36,12 +37,12 @@ public class AcidenteService {
     }
 
     @Transactional
-    public ResponseEntity atualizarAcidente(@RequestBody @Valid AcidenteCadastroDTO dados, @PathVariable Long id){
-        Acidente acidente = acidenteRepository.getReferenceById(id);
-        boolean acidenteExiste = acidenteRepository.existsById(acidente.getIdAcidente());
-
-        if (acidenteExiste) {
+    public ResponseEntity atualizarAcidente(@RequestBody @Valid AcidenteCadastroDTO dados, @PathVariable String id){
+        Optional<Acidente> acidenteOptional = acidenteRepository.findById(id);
+        if (acidenteOptional.isPresent()) {
+            Acidente acidente = acidenteOptional.get();
             acidente.atualizarInformacoes(dados);
+            acidenteRepository.save(acidente);
             return ResponseEntity.ok(new AcidenteExibicaoDTO(acidente));
         } else {
             return ResponseEntity.badRequest().body("Acidente não encontrado!");
@@ -49,11 +50,10 @@ public class AcidenteService {
     }
 
     @Transactional
-    public ResponseEntity excluirAcidente(@PathVariable Long id){
-        Acidente acidente = acidenteRepository.getReferenceById(id);
-        boolean acidenteExiste = acidenteRepository.existsById(acidente.getIdAcidente());
-        if (acidenteExiste) {
-            acidenteRepository.delete(acidente);
+    public ResponseEntity excluirAcidente(@PathVariable String id){
+        Optional<Acidente> acidenteOptional = acidenteRepository.findById(id);
+        if (acidenteOptional.isPresent()) {
+            acidenteRepository.delete(acidenteOptional.get());
             return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.badRequest().body("Acidente não encontrado!");
@@ -61,18 +61,15 @@ public class AcidenteService {
 
     }
 
-    public ResponseEntity buscarAcidente(@PathVariable Long id){
+    public ResponseEntity buscarAcidente(@PathVariable String id){
 
-        try {
-            var acidente = acidenteRepository.getReferenceById(id);
-
-            return ResponseEntity.ok(new AcidenteExibicaoDTO(acidente));
-        } catch (EntityNotFoundException erro) {
-            throw new EntityNotFoundException("Acidente não encontrado!");
+        Optional<Acidente> acidenteOptional = acidenteRepository.findById(id);
+        if (acidenteOptional.isPresent()) {
+            return ResponseEntity.ok(new AcidenteExibicaoDTO(acidenteOptional.get()));
+        } else {
+            throw new RuntimeException("Acidente não encontrado!");
         }
 
     }
 
 }
-
-

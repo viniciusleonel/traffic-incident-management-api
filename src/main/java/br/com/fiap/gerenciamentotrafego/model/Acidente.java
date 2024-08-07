@@ -2,43 +2,36 @@ package br.com.fiap.gerenciamentotrafego.model;
 
 import br.com.fiap.gerenciamentotrafego.dto.AcidenteCadastroDTO;
 
-import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import lombok.*;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "tbl_acidentes")
+@Document(collection = "acidentes")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
+@EqualsAndHashCode(of = "idAcidente")
 public class Acidente {
 
     @Id
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "SEQ_ACIDENTES"
-    )
-    @SequenceGenerator(
-            name = "SEQ_ACIDENTES",
-            sequenceName = "SEQ_ACIDENTES",
-            allocationSize = 20
-    )
-    @Column(name = "id_acidente")
-    private Long idAcidente;
+    private String idAcidente;
 
+    @Field
     private Veiculo veiculo;
 
+    @Field
     private Rua rua;
 
-    @Column(name = "data_hora",  nullable = false)
+    @Field
     private LocalDate dataHora;
 
-    @Column(name = "gravidade", length = 50, nullable = false)
+    @Field
     private String gravidade;
 
-    @Column(name = "localizacao", length = 100, nullable = false)
+    @Field
     private String localizacao;
 
     public Acidente(AcidenteCadastroDTO dados) {
