@@ -1,20 +1,16 @@
 # API Gerenciamnento de tráfego
 
-### Primeiro passo - Configurar Banco de dados Oracle
+### Primeiro passo - Configurar Banco de dados MongoDB
 
-Inserir seu 'username' e sua password para funcionamento da aplicação
+Insira o link de seu banco de dados MongoDB Atlas em uma variável de ambiente chamada `MONGODB`.
 
 `application.properties`
-```
-spring.datasource.url=jdbc:oracle:thin:@oracle.fiap.com.br:1521:ORCL
-spring.datasource.username=${DB_ORACLE_USER}  <<<<<---------
-spring.datasource.password=${DB_ORACLE_PASSWORD} <<<<<----------
-spring.datasource.driver-class-name=oracle.jdbc.OracleDriver
-```
+
+`spring.data.mongodb.uri=${MONGODB}`
 
 ---
 
-### Segundo passo - Iniciar a aplicação / Docker (Opcional)
+### Segundo passo - Iniciar a aplicação com Docker
 
 Para iniciar a aplicação sem o uso do docker apenas pressione `run` no arquivo **JAR** ou na classe `GerenciamentoTrafegoApplication`
 
