@@ -3,7 +3,6 @@ package br.com.fiap.gerenciamentotrafego.service;
 import br.com.fiap.gerenciamentotrafego.model.Veiculo;
 import br.com.fiap.gerenciamentotrafego.repository.VeiculoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.annotation.Id;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,11 +15,19 @@ public class VeiculoService {
     private VeiculoRepository veiculoRepository;
 
     @Transactional
-    public void saveAll(List<Veiculo> veiculos, String acidenteId) {
+    public void salvarListaVeiculos(List<Veiculo> veiculos, String acidenteId) {
         for (Veiculo veiculo : veiculos) {
             veiculoRepository.save(veiculo);
         }
     }
 
+    @Transactional
+    public void deleteAllByAcidenteId(String acidenteId) {
+        veiculoRepository.deleteByAcidenteId(acidenteId);
+    }
+
+    public List<Veiculo> getAllByAcidenteId(String acidenteId) {
+        return veiculoRepository.findByAcidenteId(acidenteId);
+    }
 
 }

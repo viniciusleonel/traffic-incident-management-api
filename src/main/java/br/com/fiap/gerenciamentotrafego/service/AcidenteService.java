@@ -5,8 +5,6 @@ import br.com.fiap.gerenciamentotrafego.dto.AcidenteExibicaoDTO;
 import br.com.fiap.gerenciamentotrafego.model.Acidente;
 import br.com.fiap.gerenciamentotrafego.model.Veiculo;
 import br.com.fiap.gerenciamentotrafego.repository.AcidenteRepository;
-import br.com.fiap.gerenciamentotrafego.repository.RuaRepository;
-import br.com.fiap.gerenciamentotrafego.repository.VeiculoRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -31,9 +29,8 @@ public class AcidenteService {
     private VeiculoService veiculoService;
 
     @Autowired
-    private RuaRepository ruaRepository;
-    @Autowired
-    private VeiculoRepository veiculoRepository;
+    private RuaService ruaService;
+
 
     @Transactional
     public ResponseEntity<?> cadastrarNovoAcidente(AcidenteCadastroDTO dados, UriComponentsBuilder uriBuilder) {
@@ -49,8 +46,8 @@ public class AcidenteService {
         // Adiciona o ID do acidente à rua
         acidente.getRua().setAcidenteId(acidente.getId());
 
-        veiculoService.saveAll(acidente.getVeiculos(), acidente.getId());
-        ruaRepository.save(acidente.getRua());
+        veiculoService.salvarListaVeiculos(acidente.getVeiculos(), acidente.getId());
+        ruaService.salvarRua(acidente.getRua());
         var uri = uriBuilder.path("/acidentes/{id}").buildAndExpand(acidente.getId()).toUri();
         return ResponseEntity.created(uri).body(new AcidenteExibicaoDTO(acidente));
     }
@@ -58,7 +55,7 @@ public class AcidenteService {
     public Page<AcidenteExibicaoDTO> listarAcidentes(Pageable paginacao) {
         Page<Acidente> acidentes = acidenteRepository.findAll(paginacao);
         return acidentes.map(acidente -> {
-            List<Veiculo> veiculos = veiculoRepository.findByAcidenteId(acidente.getId());
+            List<Veiculo> veiculos = veiculoService.getAllByAcidenteId(acidente.getId());
             acidente.setVeiculos(veiculos);
             return new AcidenteExibicaoDTO(acidente);
         });
@@ -82,8 +79,8 @@ public class AcidenteService {
         Optional<Acidente> acidenteOptional = acidenteRepository.findById(id);
         if (acidenteOptional.isPresent()) {
             acidenteRepository.delete(acidenteOptional.get());
-            ruaRepository.deleteByAcidenteId(acidenteOptional.get().getId());
-            veiculoRepository.deleteByAcidenteId(acidenteOptional.get().getId());
+            ruaService.excluirRuaByAcidenteId(acidenteOptional.get().getId());
+            veiculoService.deleteAllByAcidenteId(acidenteOptional.get().getId());
             return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.badRequest().body("Acidente não encontrado!");
@@ -96,7 +93,7 @@ public class AcidenteService {
         Optional<Acidente> acidenteOptional = acidenteRepository.findById(id);
         if (acidenteOptional.isPresent()) {
             Acidente acidente = acidenteOptional.get();
-            List<Veiculo> veiculos = veiculoRepository.findByAcidenteId(id);
+            List<Veiculo> veiculos = veiculoService.getAllByAcidenteId(id);
             acidente.setVeiculos(veiculos);
             return ResponseEntity.ok(new AcidenteExibicaoDTO(acidente));
         } else {
