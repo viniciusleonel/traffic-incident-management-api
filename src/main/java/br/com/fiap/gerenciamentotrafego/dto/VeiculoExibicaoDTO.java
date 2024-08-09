@@ -12,12 +12,12 @@ public record VeiculoExibicaoDTO(
 ) {
     public VeiculoExibicaoDTO (Veiculo veiculo){
         this(
-                veiculo.getId(),
-                veiculo.getAcidenteId(),
-                veiculo.getPlaca(),
-                veiculo.getModelo(),
-                veiculo.getAno(),
-                veiculo.getCor()
+                Optional.ofNullable(veiculo.getId()).orElse(""),
+                Optional.ofNullable(veiculo.getAcidenteId()).orElse(""),
+                Optional.ofNullable(veiculo.getPlaca()).orElse(""),
+                Optional.ofNullable(veiculo.getModelo()).orElse(""),
+                Optional.ofNullable(veiculo.getAno()).orElse(null),
+                Optional.ofNullable(veiculo.getCor()).orElse("")
         );
     }
 }

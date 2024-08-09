@@ -5,6 +5,7 @@ import br.com.fiap.gerenciamentotrafego.model.Acidente;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public record AcidenteExibicaoDTO(
@@ -18,13 +19,12 @@ public record AcidenteExibicaoDTO(
 
     public AcidenteExibicaoDTO(Acidente acidente){
         this(
-                acidente.getId(),
-                acidente.getDataHora(),
-                acidente.getGravidade(),
-                new RuaExibicaoDTO(acidente.getRua()),
-                acidente.getVeiculos().stream().map(VeiculoExibicaoDTO::new).collect(Collectors.toList()),
-                acidente.getFeridos().stream().map(FeridoExibicaoDTO::new).collect(Collectors.toList())
+                Optional.ofNullable(acidente.getId()).orElse(""),
+                Optional.ofNullable(acidente.getDataHora()).orElse(null),
+                Optional.ofNullable(acidente.getGravidade()).orElse(""),
+                Optional.ofNullable(acidente.getRua()).map(RuaExibicaoDTO::new).orElse(null),
+                Optional.ofNullable(acidente.getVeiculos()).orElse(List.of()).stream().map(VeiculoExibicaoDTO::new).collect(Collectors.toList()),
+                Optional.ofNullable(acidente.getFeridos()).orElse(List.of()).stream().map(FeridoExibicaoDTO::new).collect(Collectors.toList())
         );
-
     }
 }

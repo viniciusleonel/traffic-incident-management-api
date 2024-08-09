@@ -11,11 +11,11 @@ public record RuaExibicaoDTO(
 ) {
     public RuaExibicaoDTO (Rua rua){
         this(
-             rua.getLogradouro(),
-             rua.getNumero(),
-             rua.getCep(),
-             rua.getCidade(),
-             rua.getEstado()
+            Optional.ofNullable(rua.getLogradouro()).orElse(""),
+            Optional.ofNullable(rua.getNumero()).orElse(null),
+            Optional.ofNullable(rua.getCep()).orElse(""),
+            Optional.ofNullable(rua.getCidade()).orElse(""),
+            Optional.ofNullable(rua.getEstado()).orElse("")
         );
     }
 }
