@@ -14,6 +14,10 @@ public class Rua {
     @Id
     private String id;
 
+    @Setter
+    @Field
+    private String acidenteId;
+
     @Field
     private String logradouro;
 

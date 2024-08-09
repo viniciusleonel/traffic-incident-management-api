@@ -16,7 +16,7 @@ public class VeiculoService {
     private VeiculoRepository veiculoRepository;
 
     @Transactional
-    public void saveAll(List<Veiculo> veiculos) {
+    public void saveAll(List<Veiculo> veiculos, String acidenteId) {
         for (Veiculo veiculo : veiculos) {
             veiculoRepository.save(veiculo);
         }

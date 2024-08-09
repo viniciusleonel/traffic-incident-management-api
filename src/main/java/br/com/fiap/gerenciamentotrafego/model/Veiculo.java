@@ -6,6 +6,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.util.stream.Collectors;
+
 @Document(collection = "veiculos")
 @Getter
 @NoArgsConstructor
@@ -15,6 +17,10 @@ public class Veiculo {
 
     @Id
     private String id;
+
+    @Setter
+    @Field
+    private String acidenteId;
 
     @Field
     private String placa;
@@ -28,11 +34,20 @@ public class Veiculo {
     @Field
     private String cor;
 
+//    public Veiculo(VeiculoCadastroDTO dados, String acidenteId) {
+//        this.acidenteId = acidenteId;
+//        this.placa = dados.placa();
+//        this.modelo = dados.modelo();
+//        this.ano = dados.ano();
+//        this.cor = dados.cor();
+//    }
+
     public Veiculo(VeiculoCadastroDTO dados) {
         this.placa = dados.placa();
         this.modelo = dados.modelo();
         this.ano = dados.ano();
         this.cor = dados.cor();
     }
+
 }
 

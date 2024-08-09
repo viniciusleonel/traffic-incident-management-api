@@ -5,6 +5,8 @@ import jakarta.validation.constraints.NotNull;
 
 public record VeiculoCadastroDTO(
 
+        String idAcidente,
+
         @NotBlank(message = "Insira uma placa!")
         String placa,
 

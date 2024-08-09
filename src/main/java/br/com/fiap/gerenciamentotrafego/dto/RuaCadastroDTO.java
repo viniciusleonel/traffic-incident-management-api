@@ -6,6 +6,8 @@ import jakarta.validation.constraints.Pattern;
 
 public record RuaCadastroDTO(
 
+        String idAcidente,
+
         @NotBlank(message = "Insira um logradouro!")
         String logradouro,
 

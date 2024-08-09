@@ -3,6 +3,8 @@ package br.com.fiap.gerenciamentotrafego.service;
 import br.com.fiap.gerenciamentotrafego.dto.AcidenteCadastroDTO;
 import br.com.fiap.gerenciamentotrafego.dto.AcidenteExibicaoDTO;
 import br.com.fiap.gerenciamentotrafego.model.Acidente;
+import br.com.fiap.gerenciamentotrafego.model.Veiculo;
+import br.com.fiap.gerenciamentotrafego.model.Rua;
 import br.com.fiap.gerenciamentotrafego.repository.AcidenteRepository;
 import br.com.fiap.gerenciamentotrafego.repository.RuaRepository;
 import br.com.fiap.gerenciamentotrafego.repository.VeiculoRepository;
@@ -36,7 +38,16 @@ public class AcidenteService {
 
         Acidente acidente = new Acidente(dados);
         acidenteRepository.save(acidente);
-        veiculoService.saveAll(acidente.getVeiculos());
+
+        // Adiciona o ID do acidente a cada veículo
+        for (Veiculo veiculo : acidente.getVeiculos()) {
+            veiculo.setAcidenteId(acidente.getIdAcidente());
+        }
+
+        // Adiciona o ID do acidente à rua
+        acidente.getRua().setAcidenteId(acidente.getIdAcidente());
+
+        veiculoService.saveAll(acidente.getVeiculos(), acidente.getIdAcidente());
         ruaRepository.save(acidente.getRua());
         var uri = uriBuilder.path("/acidentes/{id}").buildAndExpand(acidente.getIdAcidente()).toUri();
         return ResponseEntity.created(uri).body(new AcidenteExibicaoDTO(acidente));
