@@ -6,6 +6,7 @@ import br.com.fiap.gerenciamentotrafego.model.Acidente;
 import br.com.fiap.gerenciamentotrafego.model.Veiculo;
 import br.com.fiap.gerenciamentotrafego.repository.AcidenteRepository;
 import br.com.fiap.gerenciamentotrafego.repository.RuaRepository;
+import br.com.fiap.gerenciamentotrafego.repository.VeiculoRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -30,6 +31,8 @@ public class AcidenteService {
 
     @Autowired
     private RuaRepository ruaRepository;
+    @Autowired
+    private VeiculoRepository veiculoRepository;
 
     @Transactional
     public ResponseEntity<?> cadastrarNovoAcidente(AcidenteCadastroDTO dados, UriComponentsBuilder uriBuilder) {
@@ -73,6 +76,8 @@ public class AcidenteService {
         Optional<Acidente> acidenteOptional = acidenteRepository.findById(id);
         if (acidenteOptional.isPresent()) {
             acidenteRepository.delete(acidenteOptional.get());
+            ruaRepository.deleteByAcidenteId(acidenteOptional.get().getId());
+            veiculoRepository.deleteByAcidenteId(acidenteOptional.get().getId());
             return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.badRequest().body("Acidente não encontrado!");

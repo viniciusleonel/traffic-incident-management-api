@@ -11,4 +11,6 @@ import java.util.List;
 
 @Repository
 public interface VeiculoRepository extends MongoRepository<Veiculo, String>{
+
+    void deleteByAcidenteId(String acidenteId);
 }

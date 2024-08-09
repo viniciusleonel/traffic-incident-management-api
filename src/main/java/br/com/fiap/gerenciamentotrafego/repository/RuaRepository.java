@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface RuaRepository extends MongoRepository<Rua, String> {
+
+    void deleteByAcidenteId(String idAcidente);
 }
