@@ -21,8 +21,9 @@ public record AcidenteCadastroDTO(
 
         @NotNull(message = "Insira ao menos um veiculo!")
         @Valid
-        List<VeiculoCadastroDTO> veiculos
+        List<VeiculoCadastroDTO> veiculos,
 
-
+        @Valid
+        List<FeridoCadastroDTO> feridos
 ) {
 }

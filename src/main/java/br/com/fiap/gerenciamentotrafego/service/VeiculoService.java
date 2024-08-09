@@ -16,9 +16,7 @@ public class VeiculoService {
 
     @Transactional
     public void salvarListaVeiculos(List<Veiculo> veiculos, String acidenteId) {
-        for (Veiculo veiculo : veiculos) {
-            veiculoRepository.save(veiculo);
-        }
+        veiculoRepository.saveAll(veiculos);
     }
 
     @Transactional

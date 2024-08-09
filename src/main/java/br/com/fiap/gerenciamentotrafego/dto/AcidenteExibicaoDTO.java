@@ -12,8 +12,8 @@ public record AcidenteExibicaoDTO(
         LocalDateTime dataHora,
         String gravidade,
         RuaExibicaoDTO rua,
-        List<VeiculoExibicaoDTO> veiculos
-
+        List<VeiculoExibicaoDTO> veiculos,
+        List<FeridoExibicaoDTO> feridos
 ) {
 
     public AcidenteExibicaoDTO(Acidente acidente){
@@ -22,8 +22,8 @@ public record AcidenteExibicaoDTO(
                 acidente.getDataHora(),
                 acidente.getGravidade(),
                 new RuaExibicaoDTO(acidente.getRua()),
-                acidente.getVeiculos().stream().map(VeiculoExibicaoDTO::new).collect(Collectors.toList())
-
+                acidente.getVeiculos().stream().map(VeiculoExibicaoDTO::new).collect(Collectors.toList()),
+                acidente.getFeridos().stream().map(FeridoExibicaoDTO::new).collect(Collectors.toList())
         );
 
     }
