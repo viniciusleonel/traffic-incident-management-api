@@ -28,4 +28,7 @@ public class VeiculoService {
         return veiculoRepository.findByAcidenteId(acidenteId);
     }
 
+    public void deleteAll() {
+        veiculoRepository.deleteAll();
+    }
 }

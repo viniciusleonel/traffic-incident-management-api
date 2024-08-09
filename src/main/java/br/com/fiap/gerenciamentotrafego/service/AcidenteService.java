@@ -96,7 +96,6 @@ public class AcidenteService {
         } else {
             return ResponseEntity.badRequest().body("Acidente não encontrado!");
         }
-
     }
 
     public ResponseEntity<?> buscarAcidente(@PathVariable String id){
@@ -111,7 +110,14 @@ public class AcidenteService {
         } else {
             return ResponseEntity.badRequest().body("Acidente não encontrado!");
         }
+    }
 
+    @Transactional
+    public void deletarTodosAcidentes() {
+        acidenteRepository.deleteAll();
+        veiculoService.deleteAll();
+        ruaService.deleteAll();
+        feridoService.deleteAll();
     }
 
 }

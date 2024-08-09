@@ -21,4 +21,8 @@ public class RuaService {
     public void excluirRuaByAcidenteId(String acidenteId) {
         ruaRepository.deleteByAcidenteId(acidenteId);
     }
+
+    public void deleteAll() {
+        ruaRepository.deleteAll();
+    }
 }

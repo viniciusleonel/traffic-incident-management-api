@@ -26,6 +26,9 @@ public class GerenciamentoTrafegoApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+
+        acidenteService.deletarTodosAcidentes();
+
         AcidenteCadastroDTO acidente = new AcidenteCadastroDTO(
             LocalDateTime.of(2024, 8, 4, 13, 0),
             "grave",

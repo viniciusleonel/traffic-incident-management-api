@@ -27,4 +27,8 @@ public class FeridoService {
     public List<Ferido> getFeridoByAcidenteId(String acidenteId){
         return feridoRepository.findByAcidenteId(acidenteId);
     }
+
+    public void deleteAll() {
+        feridoRepository.deleteAll();
+    }
 }
