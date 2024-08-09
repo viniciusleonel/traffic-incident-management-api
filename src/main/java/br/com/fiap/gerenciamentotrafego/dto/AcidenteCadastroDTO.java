@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public record AcidenteCadastroDTO(
 
@@ -18,9 +19,9 @@ public record AcidenteCadastroDTO(
         @NotBlank(message = "Insira a localização do acidente!")
         String localizacao,
 
-        @NotNull(message = "Insira um veiculo!")
+        @NotNull(message = "Insira ao menos um veiculo!")
         @Valid
-        VeiculoCadastroDTO veiculo ,
+        List<VeiculoCadastroDTO> veiculos,
 
         @NotNull(message = "Insira uma rua!")
         @Valid

@@ -11,6 +11,9 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @AllArgsConstructor
 public class Rua {
 
+    @Id
+    private String id;
+
     @Field
     private String logradouro;
 

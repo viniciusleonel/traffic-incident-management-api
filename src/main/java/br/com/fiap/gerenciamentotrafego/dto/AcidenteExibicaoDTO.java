@@ -5,13 +5,14 @@ import br.com.fiap.gerenciamentotrafego.model.Rua;
 import br.com.fiap.gerenciamentotrafego.model.Veiculo;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public record AcidenteExibicaoDTO(
         String idAcidente,
         LocalDate dataHora,
         String gravidade,
         String localizacao,
-        Veiculo veiculo,
+        List<Veiculo> veiculos,
         Rua rua
 ) {
 
@@ -21,7 +22,7 @@ public record AcidenteExibicaoDTO(
                 acidente.getDataHora(),
                 acidente.getGravidade(),
                 acidente.getLocalizacao(),
-                acidente.getVeiculo(),
+                acidente.getVeiculos(),
                 acidente.getRua()
         );
 

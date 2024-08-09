@@ -8,6 +8,8 @@ import lombok.*;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Document(collection = "acidentes")
 @Getter
@@ -20,7 +22,7 @@ public class Acidente {
     private String idAcidente;
 
     @Field
-    private Veiculo veiculo;
+    private List<Veiculo> veiculos;
 
     @Field
     private Rua rua;
@@ -35,7 +37,7 @@ public class Acidente {
     private String localizacao;
 
     public Acidente(AcidenteCadastroDTO dados) {
-        this.veiculo = new Veiculo(dados.veiculo());
+        this.veiculos = dados.veiculos().stream().map(Veiculo::new).collect(Collectors.toList());
         this.rua = new Rua(dados.rua());
         this.dataHora = dados.dataHora();
         this.gravidade = dados.gravidade();
@@ -43,8 +45,8 @@ public class Acidente {
     }
 
     public void atualizarInformacoes(AcidenteCadastroDTO dados) {
-        if (dados.veiculo() != null) {
-            this.veiculo = new Veiculo(dados.veiculo());
+        if (dados.veiculos() != null) {
+            this.veiculos = dados.veiculos().stream().map(Veiculo::new).collect(Collectors.toList());
         }
         if (dados.rua() != null) {
             this.rua = new Rua(dados.rua());

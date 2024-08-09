@@ -14,6 +14,9 @@ import org.springframework.data.mongodb.core.mapping.Field;
 public class Veiculo {
 
     @Id
+    private String id;
+
+    @Field
     private String placa;
 
     @Field
