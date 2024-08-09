@@ -1,13 +1,11 @@
 package br.com.fiap.gerenciamentotrafego.model;
 
 import br.com.fiap.gerenciamentotrafego.dto.AcidenteCadastroDTO;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import lombok.*;
 import org.springframework.data.mongodb.core.mapping.Field;
-
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,7 +27,7 @@ public class Acidente {
     private Rua rua;
 
     @Field
-    private LocalDate dataHora;
+    private LocalDateTime dataHora;
 
     @Field
     private String gravidade;

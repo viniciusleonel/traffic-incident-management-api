@@ -3,12 +3,13 @@ package br.com.fiap.gerenciamentotrafego.dto;
 import br.com.fiap.gerenciamentotrafego.model.Acidente;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public record AcidenteExibicaoDTO(
         String idAcidente,
-        LocalDate dataHora,
+        LocalDateTime dataHora,
         String gravidade,
         RuaExibicaoDTO rua,
         List<VeiculoExibicaoDTO> veiculos
