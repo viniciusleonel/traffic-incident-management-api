@@ -20,7 +20,7 @@ public record AcidenteExibicaoDTO(
     public AcidenteExibicaoDTO(Acidente acidente){
         this(
                 Optional.ofNullable(acidente.getId()).orElse(""),
-                Optional.ofNullable(acidente.getDataHora()).orElse(null),
+                acidente.getDataHora(),
                 Optional.ofNullable(acidente.getGravidade()).orElse(""),
                 Optional.ofNullable(acidente.getRua()).map(RuaExibicaoDTO::new).orElse(null),
                 Optional.ofNullable(acidente.getVeiculos()).orElse(List.of()).stream().map(VeiculoExibicaoDTO::new).collect(Collectors.toList()),
