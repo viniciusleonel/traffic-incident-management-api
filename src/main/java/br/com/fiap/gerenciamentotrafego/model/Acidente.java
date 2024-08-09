@@ -15,11 +15,11 @@ import java.util.stream.Collectors;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of = "idAcidente")
+@EqualsAndHashCode(of = "id")
 public class Acidente {
 
     @Id
-    private String idAcidente;
+    private String id;
 
     @Field
     private List<Veiculo> veiculos;
@@ -33,15 +33,11 @@ public class Acidente {
     @Field
     private String gravidade;
 
-    @Field
-    private String localizacao;
-
     public Acidente(AcidenteCadastroDTO dados) {
         this.veiculos = dados.veiculos().stream().map(Veiculo::new).collect(Collectors.toList());
         this.rua = new Rua(dados.rua());
         this.dataHora = dados.dataHora();
         this.gravidade = dados.gravidade();
-        this.localizacao = dados.localizacao();
     }
 
     public void atualizarInformacoes(AcidenteCadastroDTO dados) {
@@ -57,10 +53,6 @@ public class Acidente {
         if (dados.gravidade() != null) {
             this.gravidade = dados.gravidade();
         }
-        if (dados.dataHora() != null) {
-            this.localizacao = dados.localizacao();
-        }
-
 
     }
 }

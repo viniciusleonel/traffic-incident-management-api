@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of = "placa")
+@EqualsAndHashCode(of = "id")
 public class Veiculo {
 
     @Id
@@ -34,15 +34,9 @@ public class Veiculo {
     @Field
     private String cor;
 
-//    public Veiculo(VeiculoCadastroDTO dados, String acidenteId) {
-//        this.acidenteId = acidenteId;
-//        this.placa = dados.placa();
-//        this.modelo = dados.modelo();
-//        this.ano = dados.ano();
-//        this.cor = dados.cor();
-//    }
 
     public Veiculo(VeiculoCadastroDTO dados) {
+        this.id = dados.id();
         this.placa = dados.placa();
         this.modelo = dados.modelo();
         this.ano = dados.ano();

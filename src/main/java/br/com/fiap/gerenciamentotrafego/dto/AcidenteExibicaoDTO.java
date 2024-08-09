@@ -1,29 +1,28 @@
 package br.com.fiap.gerenciamentotrafego.dto;
 
 import br.com.fiap.gerenciamentotrafego.model.Acidente;
-import br.com.fiap.gerenciamentotrafego.model.Rua;
-import br.com.fiap.gerenciamentotrafego.model.Veiculo;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public record AcidenteExibicaoDTO(
         String idAcidente,
         LocalDate dataHora,
         String gravidade,
-        String localizacao,
-        List<Veiculo> veiculos,
-        Rua rua
+        RuaExibicaoDTO rua,
+        List<VeiculoExibicaoDTO> veiculos
+
 ) {
 
     public AcidenteExibicaoDTO(Acidente acidente){
         this(
-                acidente.getIdAcidente(),
+                acidente.getId(),
                 acidente.getDataHora(),
                 acidente.getGravidade(),
-                acidente.getLocalizacao(),
-                acidente.getVeiculos(),
-                acidente.getRua()
+                new RuaExibicaoDTO(acidente.getRua()),
+                acidente.getVeiculos().stream().map(VeiculoExibicaoDTO::new).collect(Collectors.toList())
+
         );
 
     }

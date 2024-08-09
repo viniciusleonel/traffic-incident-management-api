@@ -4,10 +4,8 @@ import br.com.fiap.gerenciamentotrafego.dto.AcidenteCadastroDTO;
 import br.com.fiap.gerenciamentotrafego.dto.AcidenteExibicaoDTO;
 import br.com.fiap.gerenciamentotrafego.model.Acidente;
 import br.com.fiap.gerenciamentotrafego.model.Veiculo;
-import br.com.fiap.gerenciamentotrafego.model.Rua;
 import br.com.fiap.gerenciamentotrafego.repository.AcidenteRepository;
 import br.com.fiap.gerenciamentotrafego.repository.RuaRepository;
-import br.com.fiap.gerenciamentotrafego.repository.VeiculoRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -41,15 +39,15 @@ public class AcidenteService {
 
         // Adiciona o ID do acidente a cada veículo
         for (Veiculo veiculo : acidente.getVeiculos()) {
-            veiculo.setAcidenteId(acidente.getIdAcidente());
+            veiculo.setAcidenteId(acidente.getId());
         }
 
         // Adiciona o ID do acidente à rua
-        acidente.getRua().setAcidenteId(acidente.getIdAcidente());
+        acidente.getRua().setAcidenteId(acidente.getId());
 
-        veiculoService.saveAll(acidente.getVeiculos(), acidente.getIdAcidente());
+        veiculoService.saveAll(acidente.getVeiculos(), acidente.getId());
         ruaRepository.save(acidente.getRua());
-        var uri = uriBuilder.path("/acidentes/{id}").buildAndExpand(acidente.getIdAcidente()).toUri();
+        var uri = uriBuilder.path("/acidentes/{id}").buildAndExpand(acidente.getId()).toUri();
         return ResponseEntity.created(uri).body(new AcidenteExibicaoDTO(acidente));
     }
 
@@ -58,7 +56,7 @@ public class AcidenteService {
     }
 
     @Transactional
-    public ResponseEntity atualizarAcidente(@RequestBody @Valid AcidenteCadastroDTO dados, @PathVariable String id){
+    public ResponseEntity<?> atualizarAcidente(@RequestBody @Valid AcidenteCadastroDTO dados, @PathVariable String id){
         Optional<Acidente> acidenteOptional = acidenteRepository.findById(id);
         if (acidenteOptional.isPresent()) {
             Acidente acidente = acidenteOptional.get();
@@ -71,7 +69,7 @@ public class AcidenteService {
     }
 
     @Transactional
-    public ResponseEntity excluirAcidente(@PathVariable String id){
+    public ResponseEntity<?> excluirAcidente(@PathVariable String id){
         Optional<Acidente> acidenteOptional = acidenteRepository.findById(id);
         if (acidenteOptional.isPresent()) {
             acidenteRepository.delete(acidenteOptional.get());
@@ -82,7 +80,7 @@ public class AcidenteService {
 
     }
 
-    public ResponseEntity buscarAcidente(@PathVariable String id){
+    public ResponseEntity<?> buscarAcidente(@PathVariable String id){
 
         Optional<Acidente> acidenteOptional = acidenteRepository.findById(id);
         if (acidenteOptional.isPresent()) {

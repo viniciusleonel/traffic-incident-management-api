@@ -16,15 +16,14 @@ public record AcidenteCadastroDTO(
         @NotBlank(message = "Insira a gravidade do acidente!")
         String gravidade,
 
-        @NotBlank(message = "Insira a localização do acidente!")
-        String localizacao,
+        @NotNull(message = "Insira uma rua!")
+        @Valid
+        RuaCadastroDTO rua,
 
         @NotNull(message = "Insira ao menos um veiculo!")
         @Valid
-        List<VeiculoCadastroDTO> veiculos,
+        List<VeiculoCadastroDTO> veiculos
 
-        @NotNull(message = "Insira uma rua!")
-        @Valid
-        RuaCadastroDTO rua
+
 ) {
 }
