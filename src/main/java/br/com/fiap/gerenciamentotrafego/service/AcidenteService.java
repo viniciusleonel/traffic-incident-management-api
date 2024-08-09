@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -55,7 +56,12 @@ public class AcidenteService {
     }
 
     public Page<AcidenteExibicaoDTO> listarAcidentes(Pageable paginacao) {
-        return acidenteRepository.findAll(paginacao).map(AcidenteExibicaoDTO::new);
+        Page<Acidente> acidentes = acidenteRepository.findAll(paginacao);
+        return acidentes.map(acidente -> {
+            List<Veiculo> veiculos = veiculoRepository.findByAcidenteId(acidente.getId());
+            acidente.setVeiculos(veiculos);
+            return new AcidenteExibicaoDTO(acidente);
+        });
     }
 
     @Transactional
@@ -89,9 +95,12 @@ public class AcidenteService {
 
         Optional<Acidente> acidenteOptional = acidenteRepository.findById(id);
         if (acidenteOptional.isPresent()) {
-            return ResponseEntity.ok(new AcidenteExibicaoDTO(acidenteOptional.get()));
+            Acidente acidente = acidenteOptional.get();
+            List<Veiculo> veiculos = veiculoRepository.findByAcidenteId(id);
+            acidente.setVeiculos(veiculos);
+            return ResponseEntity.ok(new AcidenteExibicaoDTO(acidente));
         } else {
-            throw new RuntimeException("Acidente não encontrado!");
+            return ResponseEntity.badRequest().body("Acidente não encontrado!");
         }
 
     }

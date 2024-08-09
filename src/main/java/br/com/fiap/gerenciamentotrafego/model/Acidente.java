@@ -21,6 +21,7 @@ public class Acidente {
     @Id
     private String id;
 
+    @Setter
     @Field
     private List<Veiculo> veiculos;
 
