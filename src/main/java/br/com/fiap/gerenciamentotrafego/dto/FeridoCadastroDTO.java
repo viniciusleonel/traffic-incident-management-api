@@ -16,7 +16,7 @@ public record FeridoCadastroDTO(
 
         String acidenteId,
 
-        String veiculoId
+        String placaVeiculo
 ) {
 }
 

@@ -39,7 +39,7 @@ public class Ferido {
         this.cpf = dados.cpf();
         this.gravidade = dados.gravidade();
         this.acidenteId = dados.acidenteId();
-        this.placaVeiculo = dados.veiculoId();
+        this.placaVeiculo = dados.placaVeiculo();
     }
 
 }
