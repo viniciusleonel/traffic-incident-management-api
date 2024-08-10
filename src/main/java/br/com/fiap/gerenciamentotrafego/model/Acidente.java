@@ -6,7 +6,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import lombok.*;
 import org.springframework.data.mongodb.core.mapping.Field;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,7 +24,7 @@ public class Acidente {
     private List<Veiculo> veiculos;
 
     @Field
-    private Rua rua;
+    private Endereco endereco;
 
     @Field
     private LocalDateTime dataHora;
@@ -38,7 +37,7 @@ public class Acidente {
 
     public Acidente(AcidenteCadastroDTO dados) {
         this.veiculos = dados.veiculos().stream().map(Veiculo::new).collect(Collectors.toList());
-        this.rua = new Rua(dados.rua());
+        this.endereco = new Endereco(dados.endereco());
         this.dataHora = dados.dataHora();
         this.gravidade = dados.gravidade();
         this.feridos = dados.feridos().stream().map(Ferido::new).collect(Collectors.toList());
@@ -48,8 +47,8 @@ public class Acidente {
         if (dados.veiculos() != null) {
             this.veiculos = dados.veiculos().stream().map(Veiculo::new).collect(Collectors.toList());
         }
-        if (dados.rua() != null) {
-            this.rua = new Rua(dados.rua());
+        if (dados.endereco() != null) {
+            this.endereco = new Endereco(dados.endereco());
         }
         if (dados.dataHora() != null) {
             this.dataHora = dados.dataHora();

@@ -1,19 +1,21 @@
 package br.com.fiap.gerenciamentotrafego.dto;
 
-import br.com.fiap.gerenciamentotrafego.model.Rua;
+import br.com.fiap.gerenciamentotrafego.model.Endereco;
 
 import java.util.Optional;
 
-public record RuaExibicaoDTO(
+public record EnderecoExibicaoDTO(
         String logradouro,
+        String bairro,
         Integer numero,
         String cep,
         String cidade,
         String estado
 ) {
-    public RuaExibicaoDTO (Rua rua){
+    public EnderecoExibicaoDTO(Endereco rua){
         this(
             Optional.ofNullable(rua.getLogradouro()).orElse(""),
+            Optional.ofNullable(rua.getBairro()).orElse(""),
             rua.getNumero(),
             Optional.ofNullable(rua.getCep()).orElse(""),
             Optional.ofNullable(rua.getCidade()).orElse(""),

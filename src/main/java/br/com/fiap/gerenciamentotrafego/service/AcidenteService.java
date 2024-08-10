@@ -30,7 +30,7 @@ public class AcidenteService {
     private VeiculoService veiculoService;
 
     @Autowired
-    private RuaService ruaService;
+    private EnderecoService enderecoService;
 
     @Autowired
     private FeridoService feridoService;
@@ -46,8 +46,8 @@ public class AcidenteService {
             veiculo.setAcidenteId(acidente.getId());
         }
 
-        // Adiciona o ID do acidente à rua
-        acidente.getRua().setAcidenteId(acidente.getId());
+        // Adiciona o ID do acidente ao endereco
+        acidente.getEndereco().setAcidenteId(acidente.getId());
 
         // Adiciona o ID do acidente a cada ferido
         for (Ferido ferido : acidente.getFeridos()) {
@@ -56,7 +56,7 @@ public class AcidenteService {
 
         veiculoService.salvarListaVeiculos(acidente.getVeiculos(), acidente.getId());
         feridoService.salvarListaFeridos(acidente.getFeridos(), acidente.getId());
-        ruaService.salvarRua(acidente.getRua());
+        enderecoService.salvarEndereco(acidente.getEndereco());
         var uri = uriBuilder.path("/acidentes/{id}").buildAndExpand(acidente.getId()).toUri();
         return ResponseEntity.created(uri).body(new AcidenteExibicaoDTO(acidente));
     }
@@ -89,7 +89,7 @@ public class AcidenteService {
         Optional<Acidente> acidenteOptional = acidenteRepository.findById(id);
         if (acidenteOptional.isPresent()) {
             acidenteRepository.delete(acidenteOptional.get());
-            ruaService.excluirRuaByAcidenteId(acidenteOptional.get().getId());
+            enderecoService.excluirEnderecoByAcidenteId(acidenteOptional.get().getId());
             feridoService.deleteFeridoByAcidenteId(acidenteOptional.get().getId());
             veiculoService.deleteAllByAcidenteId(acidenteOptional.get().getId());
             return ResponseEntity.noContent().build();
@@ -116,7 +116,7 @@ public class AcidenteService {
     public void deletarTodosAcidentes() {
         acidenteRepository.deleteAll();
         veiculoService.deleteAll();
-        ruaService.deleteAll();
+        enderecoService.deleteAll();
         feridoService.deleteAll();
     }
 

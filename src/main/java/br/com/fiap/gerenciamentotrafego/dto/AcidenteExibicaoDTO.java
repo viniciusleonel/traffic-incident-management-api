@@ -2,7 +2,6 @@ package br.com.fiap.gerenciamentotrafego.dto;
 
 import br.com.fiap.gerenciamentotrafego.model.Acidente;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -12,7 +11,7 @@ public record AcidenteExibicaoDTO(
         String idAcidente,
         LocalDateTime dataHora,
         String gravidade,
-        RuaExibicaoDTO rua,
+        EnderecoExibicaoDTO endereco,
         List<VeiculoExibicaoDTO> veiculos,
         List<FeridoExibicaoDTO> feridos
 ) {
@@ -22,7 +21,7 @@ public record AcidenteExibicaoDTO(
                 Optional.ofNullable(acidente.getId()).orElse(""),
                 acidente.getDataHora(),
                 Optional.ofNullable(acidente.getGravidade()).orElse(""),
-                Optional.ofNullable(acidente.getRua()).map(RuaExibicaoDTO::new).orElse(null),
+                Optional.ofNullable(acidente.getEndereco()).map(EnderecoExibicaoDTO::new).orElse(null),
                 Optional.ofNullable(acidente.getVeiculos()).orElse(List.of()).stream().map(VeiculoExibicaoDTO::new).collect(Collectors.toList()),
                 Optional.ofNullable(acidente.getFeridos()).orElse(List.of()).stream().map(FeridoExibicaoDTO::new).collect(Collectors.toList())
         );
