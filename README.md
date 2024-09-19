@@ -1,4 +1,4 @@
-# API Gerenciamnento de tráfego
+# API Gerenciamento de Incidentes de Tráfego
 
 ### Primeiro passo - Configurar Banco de dados MongoDB
 
@@ -87,4 +87,4 @@ Parâmetros de Paginação e Ordenação
 - Spring Doc
 - Auth0
 - Hibernate (JPA)
-- Banco de Dados Relacional: Oracle
+- Banco de Dados Relacional: MongoDB
