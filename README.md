@@ -1,8 +1,4 @@
-# API Gerenciamnento de Incidentes de tráfego
-
-A API de Gerenciamento de Incidentes de Tráfego é uma solução para o gerenciamento de acidentes de trânsito, usuários e autenticação. Desenvolvida com Java e Spring Framework, a API oferece endpoints públicos e privados para diversas operações, incluindo cadastro e autenticação de usuários, além de registro, atualização, busca e exclusão de acidentes.
-
-A API permite o registro detalhado de acidentes de trânsito, incluindo informações sobre os veículos envolvidos, localização, data e hora do acidente, gravidade e feridos. Cada acidente pode ser registrado com múltiplos veículos e feridos, permitindo um gerenciamento abrangente e preciso dos dados. Os dados são validados e armazenados em um banco de dados MongoDB, garantindo a integridade e disponibilidade das informações para consultas futuras.
+# API Gerenciamnento de tráfego
 
 ### Primeiro passo - Configurar Banco de dados MongoDB
 
@@ -91,4 +87,4 @@ Parâmetros de Paginação e Ordenação
 - Spring Doc
 - Auth0
 - Hibernate (JPA)
-- Banco de Dados Relacional: Oracle
+- Banco de Dados Relacional: MongoDB
