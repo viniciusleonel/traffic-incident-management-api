@@ -1,4 +1,4 @@
-# API Gerenciamnento de tráfego
+# API Gerenciamento de Incidentes de Tráfego
 
 ### Primeiro passo - Configurar Banco de dados MongoDB
 
