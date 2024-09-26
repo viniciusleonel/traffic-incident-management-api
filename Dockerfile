@@ -1,14 +1,23 @@
-# Use a imagem base que possui suporte para Java e Maven
-FROM openjdk:17 AS build
+FROM maven:3.9.8-eclipse-temurin-21 AS build
 
-# Define o diretório de trabalho dentro do contêiner
-WORKDIR /gerenciamento-trafego
+RUN mkdir /opt/app
 
-# Copie o arquivo JAR da sua aplicação para o diretório de trabalho no contêiner
-COPY target/*.jar /gerenciamento-trafego/gerenciamento-trafego-0.0.1-SNAPSHOT.jar
+COPY . /opt/app
 
-# Exponha a porta 8080 para a aplicação
+WORKDIR /opt/app
+
+RUN mvn clean package
+
+FROM eclipse-temurin:21-jre-alpine
+
+RUN mkdir /opt/app
+
+COPY --from=build  /opt/app/target/app.jar /opt/app/app.jar
+
+WORKDIR /opt/app
+
+ENV PROFILE=prd
+
 EXPOSE 8080
 
-# Comando para iniciar a aplicação quando o contêiner for iniciado
-CMD ["java", "-jar", "gerenciamento-trafego-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-Dspring.profiles.active=${PROFILE}", "-jar", "app.jar"]

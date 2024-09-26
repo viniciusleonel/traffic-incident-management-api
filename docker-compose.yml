@@ -8,6 +8,10 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
+    environment:
+      - PROFILE=dev
+      - MONGODB=
+      - JWT_SECRET=
     networks:
       - gerenciamento-trafego-net
 
