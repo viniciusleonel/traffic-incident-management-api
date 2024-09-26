@@ -12,7 +12,7 @@ FROM eclipse-temurin:21-jre-alpine
 
 RUN mkdir /opt/app
 
-COPY --from=build  /opt/app/target/app.jar /opt/app/app.jar
+COPY --from=build  /opt/app/target/gerenciamento-trafego-0.0.1-SNAPSHOT.jar /opt/app/gerenciamento-trafego-0.0.1-SNAPSHOT.jar
 
 WORKDIR /opt/app
 
@@ -20,4 +20,4 @@ ENV PROFILE=prd
 
 EXPOSE 8080
 
-ENTRYPOINT ["java", "-Dspring.profiles.active=${PROFILE}", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-Dspring.profiles.active=${PROFILE}", "-jar", "gerenciamento-trafego-0.0.1-SNAPSHOT.jar"]
