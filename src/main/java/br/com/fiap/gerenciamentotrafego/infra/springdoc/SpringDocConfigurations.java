@@ -23,12 +23,12 @@ public class SpringDocConfigurations {
                                         .bearerFormat("JWT")))
                 .info(new Info()
                         .title("Gerenciamento de Trafego API")
-                        .description("API Rest da FIAP")
+                        .description("A API de Gerenciamento de Incidentes de Tráfego, oferece soluções para o gerenciamento de acidentes de trânsito, usuários e autenticação. Com endpoints públicos e privados, permite o registro detalhado de acidentes, incluindo veículos, localização, data, hora, gravidade e feridos, armazenando os dados validados em um banco MongoDB. Foi implementado um workflow de Integração Contínua (CI) utilizando GitHub Actions para testes e builds em pull requests, e um processo de Entrega Contínua (CD) que realiza o deploy automático da aplicação em produção. A aplicação é containerizada com Docker e implantada na Azure, garantindo atualizações rápidas e escalabilidade.")
                         .contact(new Contact()
-                                .name("Time Backend")
-                                .email("example@email.com"))
-                        .license(new License()
-                                .name("Apache 2.0")
-                                .url("http://example.url.br/api/licenca")));
+                                .name("Vinicius Leonel")
+                                .email("viniciuslps.cms@gmail.com")));
+//                        .license(new License()
+//                                .name("Apache 2.0")
+//                                .url("http://example.url.br/api/licenca")));
     }
 }
