@@ -22,7 +22,7 @@ public class SpringDocConfigurations {
                                         .scheme("bearer")
                                         .bearerFormat("JWT")))
                 .info(new Info()
-                        .title("Gerenciamento de Trafego API")
+                        .title("Gerenciamento de Incidentes de Tráfego API")
                         .description("""
                                 A API de Gerenciamento de Incidentes de Tráfego foi desenvolvida com Java e Spring, oferecendo soluções para o gerenciamento de acidentes de trânsito, usuários e autenticação. Com endpoints públicos e privados, permite o registro detalhado de acidentes, incluindo veículos, localização, data, hora, gravidade e feridos, armazenando os dados validados em um banco MongoDB. \n
                                 
