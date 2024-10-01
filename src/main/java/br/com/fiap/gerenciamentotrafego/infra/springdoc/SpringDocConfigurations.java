@@ -23,12 +23,18 @@ public class SpringDocConfigurations {
                                         .bearerFormat("JWT")))
                 .info(new Info()
                         .title("Gerenciamento de Trafego API")
-                        .description("A API de Gerenciamento de Incidentes de Tráfego foi desenvolvida com Java e Spring, oferecendo soluções para o gerenciamento de acidentes de trânsito, usuários e autenticação. Com endpoints públicos e privados, permite o registro detalhado de acidentes, incluindo veículos, localização, data, hora, gravidade e feridos, armazenando os dados validados em um banco MongoDB. Foi implementado um workflow de Integração Contínua (CI) utilizando GitHub Actions para testes e builds em pull requests, e um processo de Entrega Contínua (CD) que realiza o deploy automático da aplicação em produção. A aplicação é containerizada com Docker e implantada na Azure, garantindo atualizações rápidas e escalabilidade.")
+                        .description("""
+                                A API de Gerenciamento de Incidentes de Tráfego foi desenvolvida com Java e Spring, oferecendo soluções para o gerenciamento de acidentes de trânsito, usuários e autenticação. Com endpoints públicos e privados, permite o registro detalhado de acidentes, incluindo veículos, localização, data, hora, gravidade e feridos, armazenando os dados validados em um banco MongoDB. Foi implementado um workflow de Integração Contínua (CI) utilizando GitHub Actions para testes e builds em pull requests, e um processo de Entrega Contínua (CD) que realiza o deploy automático da aplicação em produção. A aplicação é containerizada com Docker e implantada na Azure, garantindo atualizações rápidas e escalabilidade.\
+                                
+                                Foi implementado um workflow de Integração Contínua (CI) utilizando GitHub Actions para testes e builds em pull requests, e um processo de Entrega Contínua (CD) que realiza o deploy automático da aplicação em produção. A aplicação é containerizada com Docker e implantada na Azure, garantindo atualizações rápidas e escalabilidade.
+                                """)
                         .contact(new Contact()
                                 .name("Vinicius Leonel")
-                                .email("viniciuslps.cms@gmail.com")));
-//                        .license(new License()
-//                                .name("Apache 2.0")
-//                                .url("http://example.url.br/api/licenca")));
+                                .email("viniciuslps.cms@gmail.com")
+                                .url("https://www.linkedin.com/in/viniciuslps/")
+                        )
+                        .license(new License()
+                                .name("GitHub")
+                                .url("https://github.com/viniciusleonel/traffic-incident-management-api")));
     }
 }
