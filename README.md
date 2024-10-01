@@ -1,32 +1,47 @@
 # API Gerenciamento de Incidentes de Tráfego
 
-A API de Gerenciamento de Incidentes de Tráfego foi desenvolvida com Java e Spring, oferecendo soluções para o gerenciamento de acidentes de trânsito, usuários e autenticação. Com endpoints públicos e privados, permite o registro detalhado de acidentes, incluindo veículos, localização, data, hora, gravidade e feridos, armazenando os dados validados em um banco MongoDB. Foi implementado um workflow de Integração Contínua (CI) utilizando GitHub Actions para testes e builds em pull requests, e um processo de Entrega Contínua (CD) que realiza o deploy automático da aplicação em produção. A aplicação é containerizada com Docker e implantada na Azure, garantindo atualizações rápidas e escalabilidade.
+A API de Gerenciamento de Incidentes de Tráfego foi desenvolvida com Java e Spring, 
+oferecendo soluções para o gerenciamento de acidentes de trânsito, usuários e autenticação. 
+Com endpoints públicos e privados, permite o registro detalhado de acidentes, incluindo 
+veículos, localização, data, hora, gravidade e feridos, armazenando os dados validados 
+em um banco MongoDB. 
+
+Foi implementado um workflow de Integração Contínua (CI) utilizando GitHub Actions para testes e builds em pull requests, e um processo de Entrega Contínua (CD) que realiza o deploy automático da aplicação em produção. A aplicação é containerizada com Docker e implantada na Azure, garantindo atualizações rápidas e escalabilidade.
+
+[Traffic Incident Management API Azure](https://traffic-incident-api-dev-dtbtfvg2e7e7a8eq.eastus2-01.azurewebsites.net/swagger-ui/index.html)
 
 --- 
 
-### Primeiro passo - Configurar Banco de dados MongoDB
+## Requisitos:
+- Ter o Docker instalado.
+- Ter o Java instalado.
+- Ter um banco de dados MongoDB Atlas.
+- Clonar este repositório: `git clone https://github.com/viniciusleonel/traffic-incident-management-api`
 
-Insira o link de seu banco de dados MongoDB Atlas em uma variável de ambiente chamada `MONGODB`.
+## Configuração
 
-`application.properties`
+1. Configure as variáveis de ambiente no seu arquivo `.env` ou no seu ambiente:
+- PROFILE
+- MONGODB
+- JWT_SECRET
 
-`spring.data.mongodb.uri=${MONGODB}`
+2. Agora execute a classe `GerenciamentoTrafegoApplication` e a API estará pronta para uso.
 
----
+## Executando a aplicação com Docker
 
-### Segundo passo - Iniciar a aplicação com Docker
+1. Configure as mesmas variáveis de ambiente em `docker-compose`>`environment`
 
-Para iniciar a aplicação sem o uso do docker apenas pressione `run` no arquivo **JAR** ou na classe `GerenciamentoTrafegoApplication`
+2. Abra o terminal na pasta raiz que contém os arquivos docker e digite os seguintes comandos:
 
-Se deseja usar o docker para rodar um container da aplicação, abra o terminal na pasta raiz que contém os arquivos docker e digite os seguintes comandos:
+    - Construir a imagem:
+      `docker-compose build`
 
-Construir a imagem:
-`docker-compose build`
+    - Iniciar os contêineres:
+      `docker-compose up -d`
 
-Iniciar os contêineres:
-`docker-compose up`
+   Isso irá iniciar o contêiner em segundo plano.
 
-Feito isso, a aplicação irá iniciar.
+Feito isso, a API estará disponível em `http://localhost:8080`.
 
 ---
 
@@ -85,10 +100,15 @@ Parâmetros de Paginação e Ordenação
 ## Tecnologias Utilizadas
 
 - Java
-- Spring Framework
 - Spring Boot
-- Spring Security (JWT)
 - Spring Doc
+- Spring Security
+- Json Web Token (JWT)
 - Auth0
-- Hibernate (JPA)
-- Banco de Dados Relacional: MongoDB
+- Spring Data MongoDB
+- Swagger
+- Docker & DockerHub
+- GitHub Actions
+- Microsoft Azure
+
+## **Criado por**: [Vinicius Leonel](https://www.linkedin.com/in/viniciuslps/)
