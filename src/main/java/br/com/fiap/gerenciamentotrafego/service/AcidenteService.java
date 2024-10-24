@@ -2,6 +2,7 @@ package br.com.fiap.gerenciamentotrafego.service;
 
 import br.com.fiap.gerenciamentotrafego.dto.AcidenteCadastroDTO;
 import br.com.fiap.gerenciamentotrafego.dto.AcidenteExibicaoDTO;
+import br.com.fiap.gerenciamentotrafego.dto.ResponseDTO;
 import br.com.fiap.gerenciamentotrafego.model.Acidente;
 import br.com.fiap.gerenciamentotrafego.model.Ferido;
 import br.com.fiap.gerenciamentotrafego.model.Veiculo;
@@ -80,7 +81,7 @@ public class AcidenteService {
             acidenteRepository.save(acidente);
             return ResponseEntity.ok(new AcidenteExibicaoDTO(acidente));
         } else {
-            return ResponseEntity.badRequest().body("Acidente não encontrado!");
+            return ResponseEntity.badRequest().body(new ResponseDTO("Acidente não encontrado!"));
         }
     }
 
@@ -94,7 +95,7 @@ public class AcidenteService {
             veiculoService.deleteAllByAcidenteId(acidenteOptional.get().getId());
             return ResponseEntity.noContent().build();
         } else {
-            return ResponseEntity.badRequest().body("Acidente não encontrado!");
+            return ResponseEntity.badRequest().body(new ResponseDTO("Acidente não encontrado!"));
         }
     }
 
@@ -108,7 +109,7 @@ public class AcidenteService {
             acidente.setVeiculos(veiculos);
             return ResponseEntity.ok(new AcidenteExibicaoDTO(acidente));
         } else {
-            return ResponseEntity.badRequest().body("Acidente não encontrado!");
+            return ResponseEntity.badRequest().body(new ResponseDTO("Acidente não encontrado!"));
         }
     }
 

@@ -37,4 +37,9 @@ public class UsuarioController {
         Page<UsuarioExibicaoDTO> page = usuarioService.listarUsuarios(paginacao);
         return ResponseEntity.ok(page);
     }
+
+    @DeleteMapping("deletar/{id}")
+    public ResponseEntity<?> excluir(@PathVariable String id){
+        return usuarioService.excluirUsuario(id);
+    }
 }

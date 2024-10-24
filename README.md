@@ -54,13 +54,13 @@ Feito isso, a API estará disponível em `http://localhost:8080`.
 ### Endpoints Públicos
 
 - **POST /usuarios/cadastrar**: Endpoint para cadastro de novos usuários. Recebe os dados do usuário a ser cadastrado. (Padrão JSON abaixo)
-    - **login**<span style="color: red;">*</span>: <span style="color: green;">string </span>( email )
+    - **email**<span style="color: red;">*</span>: <span style="color: green;">string </span>( email )
     - **senha**<span style="color: red;">*</span>: <span style="color: green;">string</span>
     - **role**<span style="color: red;">*</span>: <span style="color: green;">ADMIN/USER</span>
   
 
 - **POST /autenticacao/login**: Endpoint para autenticação de usuários. Recebe as credenciais do usuário e retorna um token JWT válido. (Padrão JSON abaixo)
-    - **login**<span style="color: red;">*</span>: <span style="color: green;">string </span>( email )
+    - **email**<span style="color: red;">*</span>: <span style="color: green;">string </span>( email )
     - **senha**<span style="color: red;">*</span>: <span style="color: green;">string</span>
 
 
