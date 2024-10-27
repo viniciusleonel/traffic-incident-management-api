@@ -1,5 +1,6 @@
 package br.com.fiap.gerenciamentotrafego.controller;
 
+import br.com.fiap.gerenciamentotrafego.dto.ResponseDTO;
 import br.com.fiap.gerenciamentotrafego.dto.UsuarioCadastroDTO;
 import br.com.fiap.gerenciamentotrafego.dto.UsuarioExibicaoDTO;
 import br.com.fiap.gerenciamentotrafego.service.UsuarioService;
@@ -26,7 +27,7 @@ public class UsuarioController {
     public ResponseEntity<?> cadastrar(@RequestBody @Valid UsuarioCadastroDTO dados, UriComponentsBuilder uriBuilder) {
 
         if (usuarioService.usuarioExiste(dados.email())) {
-            return ResponseEntity.badRequest().body("Usuário já cadastrado!");
+            return ResponseEntity.badRequest().body(new ResponseDTO("Usuário já cadastrado!"));
         }
 
         return usuarioService.cadastrarNovoUsuario(dados, uriBuilder);

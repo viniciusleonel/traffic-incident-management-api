@@ -1,6 +1,7 @@
 package br.com.fiap.gerenciamentotrafego.controller;
 
 import br.com.fiap.gerenciamentotrafego.dto.AutenticacaoDTO;
+import br.com.fiap.gerenciamentotrafego.dto.ResponseDTO;
 import br.com.fiap.gerenciamentotrafego.dto.TokenJWTDTO;
 import br.com.fiap.gerenciamentotrafego.model.Usuario;
 import br.com.fiap.gerenciamentotrafego.service.AutenticacaoService;
@@ -34,7 +35,7 @@ public class AutenticacaoController {
         // Verificar se o usuário existe no banco de dados
         UserDetails usuario = autenticacaoService.loadUserByUsername(dados.email());
         if (usuario == null) {
-            return ResponseEntity.badRequest().body("Usuário não encontrado");
+            return ResponseEntity.badRequest().body(new ResponseDTO("Usuário não encontrado"));
         }
 
         try {
