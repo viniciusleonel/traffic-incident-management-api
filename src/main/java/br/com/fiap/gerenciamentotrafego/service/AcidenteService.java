@@ -57,11 +57,7 @@ public class AcidenteService {
 
         veiculoService.salvarListaVeiculos(acidente.getVeiculos(), acidente.getId());
         feridoService.salvarListaFeridos(acidente.getFeridos(), acidente.getId());
-        if (acidente.getEndereco() != null) {
-            enderecoService.salvarEndereco(acidente.getEndereco());
-        } else {
-            return ResponseEntity.badRequest().body(new ResponseDTO("Endereco não encontrado!"));
-        }
+        enderecoService.salvarEndereco(acidente.getEndereco());
         var uri = uriBuilder.path("/acidentes/{id}").buildAndExpand(acidente.getId()).toUri();
         return ResponseEntity.created(uri).body(new AcidenteExibicaoDTO(acidente));
     }

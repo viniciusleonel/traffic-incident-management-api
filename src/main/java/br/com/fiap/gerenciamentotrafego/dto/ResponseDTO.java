@@ -1,6 +1,6 @@
 package br.com.fiap.gerenciamentotrafego.dto;
 
-public record ResponseDTO(String response) {
+public record ResponseDTO(String message) {
 }
 
 
