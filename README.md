@@ -111,4 +111,8 @@ Parâmetros de Paginação e Ordenação
 - GitHub Actions
 - Microsoft Azure
 
-## **Criado por**: [Vinicius Leonel](https://www.linkedin.com/in/viniciuslps/)
+## Criado por:
+
+### Vinicius Leonel
+
+### Linkedin: https://www.linkedin.com/in/viniciuslps
