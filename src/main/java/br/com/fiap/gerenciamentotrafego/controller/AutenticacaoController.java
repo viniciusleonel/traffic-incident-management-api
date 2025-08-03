@@ -32,7 +32,6 @@ public class AutenticacaoController {
     @PostMapping("login")
     public ResponseEntity efetuarLogin(@RequestBody @Valid AutenticacaoDTO dados){
 
-        // Verificar se o usuário existe no banco de dados
         UserDetails usuario = autenticacaoService.loadUserByUsername(dados.email());
         if (usuario == null) {
             return ResponseEntity.badRequest().body(new ResponseDTO("Usuário não encontrado"));
@@ -54,7 +53,7 @@ public class AutenticacaoController {
 
             return ResponseEntity.ok(new TokenJWTDTO(tokenJWT));
         } catch (Exception error) {
-            return ResponseEntity.badRequest().body(error.getMessage());
+            return ResponseEntity.badRequest().body(new ResponseDTO(error.getMessage()));
         }
 
     }
