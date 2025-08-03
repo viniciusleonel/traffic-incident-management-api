@@ -60,4 +60,65 @@ public class AutenticacaoControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.token").exists());
     }
+
+    @Test
+    void deveRetornarErroQuandoEmailForInvalido() throws Exception {
+        AutenticacaoDTO usuarioTest = new AutenticacaoDTO(
+                "email-invalido",
+                "1234"
+        );
+
+        mockMvc.perform(post("/autenticacao/login")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(usuarioTest)))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.email").value("Insira um e-mail válido!"));
+
+    }
+
+    @Test
+    void deveRetornarErroQuandoSenhaForInvalido() throws Exception {
+        AutenticacaoDTO usuarioTest = new AutenticacaoDTO(
+                "teste@exemplo.com",
+                "senha errada"
+        );
+
+        mockMvc.perform(post("/autenticacao/login")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(usuarioTest)))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.message").value("Usuário inexistente ou senha inválida"));
+
+    }
+
+    @Test
+    void deveRetornarErroQuandoUsuarioNaoExistir() throws Exception {
+        AutenticacaoDTO usuarioTest = new AutenticacaoDTO(
+                "nao@existe.com",
+                "senha errada"
+        );
+
+        mockMvc.perform(post("/autenticacao/login")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(usuarioTest)))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.message").value("Usuário não encontrado"));
+
+    }
+
+    @Test
+    void deveRetornarErroQuandoNaoEnviarDados() throws Exception {
+        AutenticacaoDTO usuarioTest = new AutenticacaoDTO(
+                "",
+                ""
+        );
+
+        mockMvc.perform(post("/autenticacao/login")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(usuarioTest)))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.email").value("Insira um e-mail!"))
+                .andExpect(jsonPath("$.senha").value("Insira uma senha!"));
+
+    }
 }
