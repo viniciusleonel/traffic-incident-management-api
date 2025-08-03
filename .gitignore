@@ -5,6 +5,9 @@ target/
 !**/src/test/**/target/
 .env
 
+.mvn/*
+!.mvn/wrapper/maven-wrapper.properties
+
 ### STS ###
 .apt_generated
 .classpath
