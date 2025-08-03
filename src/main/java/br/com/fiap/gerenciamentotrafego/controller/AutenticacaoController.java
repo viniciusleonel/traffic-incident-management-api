@@ -10,6 +10,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -52,9 +53,10 @@ public class AutenticacaoController {
                     );
 
             return ResponseEntity.ok(new TokenJWTDTO(tokenJWT));
-        } catch (Exception error) {
-            return ResponseEntity.badRequest().body(new ResponseDTO(error.getMessage()));
+        } catch (BadCredentialsException e) {
+            return ResponseEntity.badRequest().body(new ResponseDTO("Usuário inexistente ou senha inválida"));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(new ResponseDTO(e.getMessage()));
         }
-
     }
 }
