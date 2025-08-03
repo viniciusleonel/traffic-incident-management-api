@@ -9,7 +9,7 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - PROFILE=dev
+      - PROFILE=
       - MONGODB=
       - JWT_SECRET=
     networks:
