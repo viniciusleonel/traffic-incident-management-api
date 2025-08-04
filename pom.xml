@@ -15,7 +15,7 @@
 	<name>gerenciamento-trafego</name>
 	<description>Capitulo-8</description>
 	<properties>
-		<java.version>17</java.version>
+		<java.version>22</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
@@ -66,12 +66,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-mongodb</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>de.flapdoodle.embed</groupId>
-			<artifactId>de.flapdoodle.embed.mongo</artifactId>
-			<version>4.11.0</version>
-			<scope>test</scope>
 		</dependency>
 	</dependencies>
 	<build>

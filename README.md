@@ -112,6 +112,8 @@ Parâmetros de Paginação e Ordenação
 - GitHub Actions
 - Microsoft Azure
 
+## Swagger [Doc](http://localhost:8080/swagger-ui/index.html)
+
 ## Criado por:
 
 ### Vinicius Leonel
