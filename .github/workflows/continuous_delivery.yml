@@ -25,5 +25,5 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/api-principal:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/traffic-incident-management-api:latest
           file: ./Dockerfile
