@@ -9,9 +9,9 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - PROFILE=
-      - MONGODB=
-      - JWT_SECRET=
+      - PROFILE=${PROFILE}
+      - MONGODB=${MONGODB}
+      - JWT_SECRET=${JWT_SECRET}
     networks:
       - gerenciamento-trafego-net
 
