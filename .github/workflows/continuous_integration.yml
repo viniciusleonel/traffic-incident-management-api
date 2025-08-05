@@ -22,12 +22,19 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      - name: Criar rede trafego-net
+        run: docker network create trafego-net
+
       - name: Build imagem da API principal
         run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/traffic-incident-management-api:latest .
 
       - name: Subir container API principal
         run: >
-          docker run -d -p 8080:8080 -e PROFILE="${{ secrets.PROFILE }}" -e MONGODB="${{ secrets.MONGODB }}" -e JWT_SECRET="${{ secrets.JWT_SECRET }}" --name traffic-incident-management-api ${{ secrets.DOCKERHUB_USERNAME }}/traffic-incident-management-api:latest
+          docker run -d --network trafego-net --name traffic-incident-management-api -p 8080:8080
+          -e PROFILE="${{ secrets.PROFILE }}"
+          -e MONGODB="${{ secrets.MONGODB }}"
+          -e JWT_SECRET="${{ secrets.JWT_SECRET }}"
+          ${{ secrets.DOCKERHUB_USERNAME }}/traffic-incident-management-api:latest
 
       - name: Aguardar API iniciar
         run: |
@@ -45,4 +52,7 @@ jobs:
         run: docker pull ${{ secrets.DOCKERHUB_USERNAME }}/testes-bdd-ger_de_traf:latest
 
       - name: Rodar testes
-        run: docker run --network="host" ${{ secrets.DOCKERHUB_USERNAME }}/testes-bdd-ger_de_traf:latest
+        run: >
+          docker run --rm --network trafego-net
+          -e API_HOST=http://traffic-incident-management-api:8080
+          ${{ secrets.DOCKERHUB_USERNAME }}/testes-bdd-ger_de_traf:latest
