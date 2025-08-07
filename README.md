@@ -8,6 +8,31 @@ em um banco MongoDB.
 
 Foi implementado um workflow de Integração Contínua (CI) utilizando GitHub Actions para testes e builds em pull requests, e um processo de Entrega Contínua (CD) que realiza o deploy automático da aplicação em produção. A aplicação é containerizada com Docker e implantada na Azure, garantindo atualizações rápidas e escalabilidade.
 
+### Atualização no workflow de Integração Contínua (CI) e Entrega Contínua (CD)
+
+***Mudança motivada pela descontinuação dos benefícios do plano gratuito da conta Azure.***
+
+O workflow `CI` é acionado automaticamente em cada `pull_request` ou `push` na `branch main`. 
+Ele realiza o `build` da imagem Docker da API principal e sobe um container 
+conectado a uma rede personalizada chamada **trafego-net**. Em seguida, aguarda 
+a inicialização da API utilizando um endpoint de health check (`/actuator/health`). 
+Após a confirmação de que a API está ativa, o workflow faz o download da 
+imagem da API de testes `testes-bdd-ger_de_traf`, que contém os testes de 
+integração automatizados. Essa imagem é executada em um container que se 
+comunica com a API principal por meio da rede Docker criada. O teste é 
+executado com a variável `API_HOST` apontando para o nome do container da 
+API, garantindo um ambiente isolado e replicável para validação de 
+funcionalidades. Essa abordagem garante que alterações no código sejam 
+testadas de forma automatizada antes de serem entregues, reforçando a 
+qualidade contínua da aplicação.
+
+Após os testes de integração serem concluídos com sucesso, o workflow 
+`CD` é acionado automaticamente. Ele realiza o checkout do código, configura o 
+Docker Buildx, faz login no Docker Hub e executa o `build` e `push` da imagem 
+Docker da API principal. Isso garante que apenas versões testadas da aplicação sejam 
+publicadas no repositório, automatizando e confiabilizando o processo de 
+entrega contínua.
+
 <!--
 [Traffic Incident Management API Azure](https://traffic-incident-api-dev-dtbtfvg2e7e7a8eq.eastus2-01.azurewebsites.net/swagger-ui/index.html)-->
 
@@ -22,9 +47,9 @@ Foi implementado um workflow de Integração Contínua (CI) utilizando GitHub Ac
 ## Configuração
 
 1. Configure as variáveis de ambiente no seu arquivo `.env` ou no seu ambiente:
-- PROFILE
-- MONGODB
-- JWT_SECRET
+   - PROFILE
+   - MONGODB
+   - JWT_SECRET
 
 2. Agora execute a classe `GerenciamentoTrafegoApplication` e a API estará pronta para uso.
 
