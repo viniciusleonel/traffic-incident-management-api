@@ -40,18 +40,22 @@ entrega contínua.
 
 ## Requisitos:
 - Ter o Docker instalado.
-- Ter o Java instalado.
+- Ter o Java (21) instalado. (Opcional)
 - Ter um banco de dados MongoDB Atlas.
 - Clonar este repositório: `git clone https://github.com/viniciusleonel/traffic-incident-management-api`
 
-## Configuração
+## Executando a aplicação com Java (21)
 
-1. Configure as variáveis de ambiente no seu arquivo `.env` ou no seu ambiente:
-   - PROFILE
-   - MONGODB
-   - JWT_SECRET
+1. Configure as seguintes variáveis de ambiente no seu ambiente de desenvolvimento (ex: IntelliJ):
+   - `PROFILE`
+   - `MONGODB`
+   - `JWT_SECRET`
 
-2. Agora execute a classe `GerenciamentoTrafegoApplication` e a API estará pronta para uso.
+   > **Dica (IntelliJ):** Vá em ***Run > Edit Configurations...*** e adicione essas variáveis no campo ***Environment variables***.
+
+2. Execute a classe `GerenciamentoTrafegoApplication`.
+
+Feito isso, a API estará disponível em `http://localhost:8080`.
 
 ## Executando a aplicação com Docker
 
